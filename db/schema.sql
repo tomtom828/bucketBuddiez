@@ -9,14 +9,14 @@ sequelize db:migrate && sequelize db:seed:all
 
 
 
-
-
 -- ==========================================================================================
 
 
 
-
 -- The following lines are for documentation, no need to copy for run anything after this...
+
+
+-- CREATE MIGRATIONS
 
   -- Users Table Migration
   ` sequelize model:create --name Users --attributes 'firstName:string lastName:string facebookId:integer' `
@@ -41,4 +41,30 @@ sequelize db:migrate && sequelize db:seed:all
   ` sequelize model:create --name StateLikes --attributes 'userId:integer stateId:integer' `
 
   -- City Likes (all the cities that all the users like)
-  ` sequelize model:create --name CountryLikes --attributes 'userId:integer cityId:integer' `
+  ` sequelize model:create --name CityLikes --attributes 'userId:integer cityId:integer' `
+
+
+
+
+-- CREATE SEEDS (up and down entries were done manually)
+
+  ` sequelize seed:create --name users-seeder `
+
+  ` sequelize seed:create --name countries-seeder `
+  ` sequelize seed:create --name states-seeder `
+  ` sequelize seed:create --name cities-seeder `
+
+  ` sequelize seed:create --name countrylikes-seeder `
+  ` sequelize seed:create --name statelikes-seeder `
+  ` sequelize seed:create --name citylikes-seeder `
+
+
+
+
+-- UNDO COMMANDS
+
+  -- Remove the seeds
+  ` sequelize db:seed:undo:all `
+
+  -- Remove all tables
+  ` sequelize db:migrate:undo:all `
