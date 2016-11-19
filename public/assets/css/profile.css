@@ -1,0 +1,86 @@
+.imgDiv {
+	width: 100%;
+	height:100%;
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#profileHeader {
+	height: 300px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image: url(http://lorempixel.com/280/50/nature/8);
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 0;
+}
+
+#profileMainRow {
+	position: relative;
+	top: 200px;
+}
+
+#profileMainRow .card.profileImage {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	top: 20px;
+	right: 10%;
+	/*left: calc(75% - 150px);*/
+}
+
+#profileMainRow .profileImage .card-content {
+	padding: 5px;
+	width: 100%;
+	height: 100%;
+	/*position: relative;*/
+	/*left: 10px;*/
+}
+
+#profileImage {
+	width: 100%;
+	height: 100%;
+	background-image: url(https://s3.amazonaws.com/uifaces/faces/twitter/vladarbatov/128.jpg);
+	background-position: 50% 50%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin: 0;
+}
+
+.profileDetails {
+	width: calc(80% - 230px);
+	position: relative;
+	left: 30px;
+	top: 100px;
+}
+
+#traveledToContainer .imgDiv,
+#nextStopContainer .imgDiv {
+	background-size: cover;
+}
+
+#bottomContainer {
+	position: relative;
+	top: 297px;
+}
+
+#traveledToContainer .card-content.imgContent,
+#nextStopContainer .card-content.imgContent {
+	padding: 5px;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}
+
+#traveledToContainer .card,
+#nextStopContainer .card  {
+	width: 300px;
+	height: 300px;
+	/*float: left;*/
+	display: inline-block;
+	margin: 0;
+}
