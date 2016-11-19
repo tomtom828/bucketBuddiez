@@ -18,7 +18,6 @@
       FB.getLoginStatus(function(response){
         if (response.status === 'connected') {
           document.getElementById('status').innerHTML = 'We are conected';
-          // document.getElementById('login').style.visibility = 'hidden';
         } else if (response.status === 'not_authorized') {
             document.getElementById('status').innerHTML = 'Not logged in';
         } else {
@@ -39,8 +38,10 @@
     function login() {
       FB.login(function(response){
         if (response.status === 'connected') {
-          document.getElementById('status').innerHTML = 'We are conected';
-          document
+          document.getElementById('status').innerHTML = 'You are conected';
+          document.getElementById('login').style.visibility = 'hidden';
+          getUserInfo();
+          getPhoto();
         } else if (response.status === 'not_authorized') {
             document.getElementById('status').innerHTML = 'Not logged in';
         } else {
@@ -48,9 +49,46 @@
         }
       })
     }
+
+    function logout() {
+      FB.logout(function(response) {
+          document.getElementById('login').style.visibility = 'visible';
+          document.getElementById('status').innerHTML = 'Please login';
+      });
+    }
+
+    // getting basic user info
+    function getUserInfo() {
+        FB.api('/me', function(response) {
+ 
+          var str="<b>Name</b> : "+response.name+"<br>";
+              str +="<b>Gender: </b>"+response.gender+"<br>";
+              str +="<b>Hometown: </b>"+response.hometown+"<br>";
+              str +="<b>Location:</b> "+response.location+"<br>";
+              str +="<b>id: </b>"+response.id+"<br>";
+
+          document.getElementById("status").innerHTML=str;
+ 
+        });
+    }
+
+    function getPhoto()
+    {
+      FB.api('/me/picture?type=normal', function(response) {
+ 
+          var str="<br/><b>Pic</b> : <img src='"+response.data.url+"'/>";
+          document.getElementById("status").innerHTML+=str;
+ 
+      });
+ 
+    }
   </script>
 
-  <div id="status" id="login"></div>
-  <button onclick="login()">Login</button>
+  <div id="status"></div>
+  <button onclick="login()" id="login">Login</button>
+  <br>
+  <button onclick="logout()">Logout</button>
+  <br>
+  <!-- <button onclick="getUserInfo()">Get User Info</button> -->
 </body>
 </html>
