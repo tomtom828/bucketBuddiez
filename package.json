@@ -5,14 +5,15 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set NODE_ENV=production && node server.js"
+    "start": "set NODE_ENV=production && node server.js",
+    "setupDB" : "sequelize db:migrate && sequelize db:seed:all && node db/seed-user-likes.js"
   },
   "engines": {
     "node": "4.1.1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tomtom28/bucketBuddiez.git" 
+    "url": "git+https://github.com/tomtom28/bucketBuddiez.git"
   },
   "author": "tomtom28",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
+    "fb": "^1.1.1",
     "method-override": "^2.3.6",
     "mysql": "^2.12.0",
     "sequelize": "^3.25.0",

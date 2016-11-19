@@ -1,0 +1,52 @@
+
+#tilesContent {
+	text-align: center;
+	padding-top: 5px;
+}
+
+#tilesContent .card {
+	width: 300px;
+	height: 300px;
+	/*float: left;*/
+	display: inline-block;
+	margin: 0;
+}
+
+#tilesContent .card .card-content {
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+}
+#tilesContent .card .card-content .imgDiv {
+	width: 100%;
+	height: 100%;
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.plusMinusIcon {
+	position: absolute;
+	top: 10px;
+	right: 8px;
+	width: 40px;
+	height: 40px;
+	/*background-color: red;*/
+}
+
+.plusMinusIcon .btn {
+	background-color: white;
+	color: black !important;
+}
+
+.plusMinusIcon .btn i {
+	color: black;
+}
+
+#tilesContent .tile {
+	transition: 0.2s;
+}
+
+#tilesContent .tile.activeTile {
+	transform: scale(0.85);
+}

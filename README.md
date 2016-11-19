@@ -22,7 +22,7 @@ If you wish to clone the app down to your local machine...
   * In the `development` object, add your MySQL localhost `password`.
 3. In your terminal, `cd` into the project folder and run:
   * `npm install` to download all node.js dependencies
-  * `sequelize db:migrate && sequelize db:seed:all` to migrate/seed the database via Sequelize CLI
+  * `npm run-script setupDB` to migrate/seed the database
 4. Finally, you can run the programming using:
   * `node server.js` in the terminal to start the node server
   * And navigating to `localhost:3000` in your browser.
