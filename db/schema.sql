@@ -4,8 +4,13 @@
 CREATE DATABASE bucketBuddiezDB;
 
 -- Then run the following in your Sequelize CLI to create the migrations and seed the database
-sequelize db:migrate && sequelize db:seed:all
+` sequelize db:migrate && sequelize db:seed:all `
 
+-- Then, (optional but used during development) you can seed associations
+` node db/seed-user-likes.js `
+
+-- NOTE: If you completed the readme, both of these steps were done when you ran...
+npm run-script setupDB
 
 
 

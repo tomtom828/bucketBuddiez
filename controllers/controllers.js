@@ -1,14 +1,7 @@
 // Node Dependencies
 var express = require('express');
 var router = express.Router();
-var models = require('../models'); // Pulls out the Burger Models
-
-
-// Extracts the sequelize connection from the models object
-// var sequelizeConnection = models.sequelize;
-
-// Sync the tables
-// sequelizeConnection.sync();
+var models = require('../models'); // Pulls out the Models
 
 
 // GET Routes to render pages
@@ -142,25 +135,41 @@ router.get('/:action/country/:userId/:countryId', function(req, res){
 
   // Determine if add or remove
   var action = req.params.action;
-  console.log(req.params.userId)
-  console.log(req.params.countryId)
 
-  // (add) Relate Country Id to User
+  // (add) a user like
   if(action == 'add'){
 
     // Insert a new country like
-    models.CountryLikes.create(
-      {
-        userId: req.params.userId,
-        countryId: req.params.countryId
+    models.Users.findOne({
+      where: {
+        id: req.params.userId
       }
-      ).then(function(data){
+    }).then(function(user){
+      user.addCountry(req.params.countryId)
+      .then(function(data){
         res.json(data);
+        // Redirect to country page ?
+        // res.redirect('/view/countries');
       });
+    });
 
   }
-  // (remove) Remove Country Id from User
+  // (remove) a user like
   else if(action == 'remove'){
+
+    // Delete a country like
+    models.Users.findOne({
+      where: {
+        id: req.params.userId
+      }
+    }).then(function(user){
+      user.removeCountry(req.params.countryId)
+      .then(function(data){
+        res.json(data);
+        // Redirect to bucket list page ?
+        // res.redirect('/view/bucketlist');
+      });
+    });
 
   }
   // Bad route
@@ -169,41 +178,108 @@ router.get('/:action/country/:userId/:countryId', function(req, res){
     res.redirect('index');
   }
 
-  
-    // Redirect to country page
-    //res.redirect('/view/countries');
-
-  
-    // Redirect to bucket list page
-    // res.redirect('/view/bucketlist');
 
 });
 
 
-// Add/Remove a State from Bucket List
-router.post('/:action/state/:userId/:stateId', function(req, res){
+// Add/Remove a State from Bucket List (API)
+router.get('/:action/state/:userId/:stateId', function(req, res){
 
-  // (add) Relate State Id to User
-    // Redirect to state page
-    res.redirect('/view/states');
+  // Determine if add or remove
+  var action = req.params.action;
 
-  // (remove) Remove State Id from User
-    // Redirect to bucket list page
-    res.redirect('/view/bucketlist');
+  // (add) a user like
+  if(action == 'add'){
+
+    // Insert a new state like
+    models.Users.findOne({
+      where: {
+        id: req.params.userId
+      }
+    }).then(function(user){
+      user.addState(req.params.stateId)
+      .then(function(data){
+        res.json(data);
+        // Redirect to states page ?
+        // res.redirect('/view/states');
+      });
+    });
+
+  }
+  // (remove) a user like
+  else if(action == 'remove'){
+
+    // Delete a state like
+    models.Users.findOne({
+      where: {
+        id: req.params.userId
+      }
+    }).then(function(user){
+      user.removeState(req.params.stateId)
+      .then(function(data){
+        res.json(data);
+        // Redirect to bucket list page ?
+        // res.redirect('/view/bucketlist');
+      });
+    });
+
+  }
+  // Bad route
+  else{
+    // Redirect to index
+    res.redirect('index');
+  }
 
 });
 
 
 // Add/Remove a City from Bucket List
-router.post('/:action/city/:userId/:cityId', function(req, res){
+router.get('/:action/city/:userId/:cityId', function(req, res){
 
-  // (add) Relate City Id to User
-    // Redirect to city page
-    res.redirect('/view/cities');
+  // Determine if add or remove
+  var action = req.params.action;
 
-  // (remove) Remove City Id from User
-    // Redirect to bucket list page
-    res.redirect('/view/bucketlist');
+  // (add) a user like
+  if(action == 'add'){
+
+    // Insert a new city like
+    models.Users.findOne({
+      where: {
+        id: req.params.userId
+      }
+    }).then(function(user){
+      user.addCity(req.params.cityId)
+      .then(function(data){
+        res.json(data);
+        // Redirect to states page ?
+        // res.redirect('/view/cities');
+      });
+    });
+
+  }
+  // (remove) a user like
+  else if(action == 'remove'){
+
+    // Delete a city like
+    models.Users.findOne({
+      where: {
+        id: req.params.userId
+      }
+    }).then(function(user){
+      user.removeCity(req.params.cityId)
+      .then(function(data){
+        res.json(data);
+        // Redirect to bucket list page ?
+        // res.redirect('/view/bucketlist');
+      });
+    });
+
+  }
+  // Bad route
+  else{
+    // Redirect to index
+    res.redirect('index');
+  }
 
 });
 
