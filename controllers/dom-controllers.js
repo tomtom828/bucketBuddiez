@@ -54,8 +54,8 @@ domRouter.get('/view/states', function (req, res){
     var hbsObject = { states: data };
 
     // Render *addStates* template with *states*
-    //res.render('addStates', hbsObject);
-    res.json(hbsObject);
+    res.render('addStates', hbsObject);
+    // res.json(hbsObject);
 
   });
 
@@ -74,8 +74,8 @@ domRouter.get('/view/cities', function (req, res){
     var hbsObject = { cities: data };
 
     // Render *addCities* template with *cities*
-    // res.render('addCities', hbsObject);
-    res.json(hbsObject);
+    res.render('addCities', hbsObject);
+    // res.json(hbsObject);
   });
 
 });
