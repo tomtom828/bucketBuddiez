@@ -33,13 +33,16 @@ router.get('/index', function (req, res){
 router.get('/view/countries', function (req, res){
 
   // Query Database for all Countries
-  models.Countries.findAll({}).then(function(data){
+  models.Countries.findAll({
+    order: [['countryName', 'ASC']]
+  }).then(function(data){
 
     // Pass the returned data into a Handlebars object
     var hbsObject = { countries: data };
 
     // Render *addPlaces* template with *countries*
-    res.render('addPlaces', hbsObject);
+    //res.render('addPlaces', hbsObject);
+    res.json(hbsObject);
 
   });
 
@@ -50,14 +53,17 @@ router.get('/view/countries', function (req, res){
 router.get('/view/states', function (req, res){
 
   // Query Database for all States
-  models.States.findAll({}).then(function(data){
+  models.States.findAll({
+    order: [['stateName', 'ASC']]
+  }).then(function(data){
 
     // Pass the returned data into a Handlebars object
     var hbsObject = { states: data };
 
     // Render *addPlaces* template with *states*
-    res.render('addPlaces', hbsObject);
-    
+    //res.render('addPlaces', hbsObject);
+    res.json(hbsObject);
+
   });
 
 });
@@ -66,15 +72,17 @@ router.get('/view/states', function (req, res){
 // User Sees All Cities in Database (DOM Render)
 router.get('/view/cities', function (req, res){
 
-  // Query Database for all States
-  models.Cities.findAll({}).then(function(data){
+  // Query Database for all Cities
+  models.Cities.findAll({
+    order: [['cityName', 'ASC']]
+  }).then(function(data){
 
     // Pass the returned data into a Handlebars object
     var hbsObject = { cities: data };
 
     // Render *addPlaces* template with *cities*
-    res.render('addPlaces', hbsObject);
-    
+    // res.render('addPlaces', hbsObject);
+    res.json(hbsObject);
   });
 
 });
@@ -83,20 +91,22 @@ router.get('/view/cities', function (req, res){
 // User Sees All Bucket List entries in the Database (DOM Render)
 router.get('/view/bucketlist/:userId', function(req, res){
 
-  // Query Database for all Countries, States, Cities belonging to the user
+  // Query Database for all the user's liked countries (associated via the "___likes" tables)
   models.Users.findAll({
     where: {
-      id: userId
+      id: req.params.userId // OR req.body.userId for FORM ACTION
     },
-    include: [models.Countries, models.States, models.Cities]
+    include: [models.Countries, models.States, models.Cities],
+    // order: [[models.Countries.countryName, 'ASC'],[models.States.stateName, 'ASC'],[models.Cities.cityName, 'ASC']]
   }).then(function(data){
 
     // Pass the returned data into a Handlebars object
     var hbsObject = { bucketlist: data };
 
     // Render *addPlaces* template with *states*
-    res.render('viewAccount', hbsObject);
-    
+    //res.render('viewAccount', hbsObject);
+    res.json(hbsObject);
+
   });
 
 });
@@ -105,32 +115,67 @@ router.get('/view/bucketlist/:userId', function(req, res){
 
 
 
-
-// POST Routes for Database changes
+// POST/API Routes for Database changes
 // ----------------------------------------------------
 
-// Create a new User
-router.post('/create/user/:name/:facebook', function (req, res){
+// Create a new User (FROM ACTION)
+router.post('/create/user', function (req, res){
 
   // Insert a new user to Users Table
-
-  // Redirect to index page
-  res.redirect('/index');
+  models.Users.create(
+    {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      facebookId: req.body.facebookId
+    }
+  ).then(function(){
+    // Redirect to index page
+    res.redirect('/index');
+  });
 
 });
 
 
 
-// Add/Remove a Country from Bucket List
-router.post('/:action/country/:userId/:countryId', function(req, res){
+// Add/Remove a Country from Bucket List (API)
+router.get('/:action/country/:userId/:countryId', function(req, res){
+
+  // Determine if add or remove
+  var action = req.params.action;
+  console.log(req.params.userId)
+  console.log(req.params.countryId)
 
   // (add) Relate Country Id to User
-    // Redirect to country page
-    res.redirect('/view/countries');
+  if(action == 'add'){
 
+    // Insert a new country like
+    models.CountryLikes.create(
+      {
+        userId: req.params.userId,
+        countryId: req.params.countryId
+      }
+      ).then(function(data){
+        res.json(data);
+      });
+
+  }
   // (remove) Remove Country Id from User
+  else if(action == 'remove'){
+
+  }
+  // Bad route
+  else{
+    // Redirect to index
+    res.redirect('index');
+  }
+
+  
+    // Redirect to country page
+    //res.redirect('/view/countries');
+
+  
     // Redirect to bucket list page
-    res.redirect('/view/bucketlist');
+    // res.redirect('/view/bucketlist');
 
 });
 

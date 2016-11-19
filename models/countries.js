@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        // Countries are related to Users through CountryLikes
+        Countries.belongsToMany(models.Users, {through: 'CountryLikes'});
       }
     }
   });

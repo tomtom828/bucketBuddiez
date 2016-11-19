@@ -7,7 +7,17 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+
+        // Each of the users has many country, state, and city likes
+        // Users.hasMany(models.CountryLikes);
+        // Users.hasMany(models.StateLikes);
+        // Users.hasMany(models.CityLikes);
+
+        // Each of the users has many countries, states, and cities THROUGH the countrylikes, statelikes, and citylikes
+        Users.belongsToMany(models.Countries, {through: 'CountryLikes'});
+        Users.belongsToMany(models.States, {through: 'StateLikes'});
+        Users.belongsToMany(models.Cities, {through: 'CityLikes'});
+        
       }
     }
   });
