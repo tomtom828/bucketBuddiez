@@ -19,8 +19,21 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 
-var router = require('./controllers/controllers.js');
-app.use('/', router);
+// ------------------------ Routes/Controllers ------------------------
+
+// Import DOM controller
+var domRouter = require('./controllers/dom-controllers.js');
+app.use('/', domRouter);
+
+// Import CRUD controller
+var crudRouter = require('./controllers/crud-controllers.js');
+app.use('/', crudRouter);
+
+// Import FIND controller (for matching users)
+var findRouter = require('./controllers/find-controllers.js');
+app.use('/', findRouter);
+
+// --------------------------------------------------------------------
 
 // Open Server
 var port = process.env.PORT || 3000;
