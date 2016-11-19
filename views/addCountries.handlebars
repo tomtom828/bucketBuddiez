@@ -1,0 +1,45 @@
+<!-- This is the page that the user can use to add countries to their bucket list --> 
+
+
+
+
+
+<!-- Page Title -->
+<nav>
+  <div class="nav-wrapper blue-grey lighten-1">
+    <a href="#!" class="brand-logo">Country Teleporter</a>
+  </div>
+</nav>
+
+
+<!-- Dynamically Render Country Tiles -->
+
+<main id="tilesContent">
+  {{#each countries}}
+    <div class="tile card blue-grey darken-1">
+      <div class="card-content white-text">
+                                                                <!-- Image API LINK HERE -->
+        <div class="imgDiv" style="background-image: url('http://image-api/{{this.countryName}}/')"></div>
+          <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</main>
+
+
+
+
+
+================= DELETE ALL THIS TEXT BEFORE U RUN THE SERVER =================
+Add jQuery and AJAX to hit the crud-controllers.js routes 
+ use click listener for $(".plusMinusIcon"), which pulls out the countryId...
+Then pass that into AJAX and hit this route: "/add/country/:userId/:countryId"
+this will pass it into my Update route in the crud-controllers.js file.
+
+Once this works, you can copy and paste this code into "addCites.handlebars" and "addStates.handlebars"
+chaning "{{#each countries}}" to "{{#each states}} and "cities"
+and changing the AJAX call to "/add/state/:userId/:stateId" and "city"
+
+since we don't have user authencation yet, just pass in the number 1 or 2 for /:userId
+IGNORE THE addPlaces.handlebars file, it will get deleted after we merge to master later on
