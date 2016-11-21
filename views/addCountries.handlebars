@@ -21,8 +21,8 @@
        
        <div>{{this.countryName}}</div>
                                                                 <!-- Image API LINK HERE -->
-        <div class="imgDiv" style="background-image: url('http://image-api/{{this.countryName}}/')"></div>
-          <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
+        <div class="imgDiv" ></div> <!-- style="background-image: url('http://image-api/{{this.countryName}}/')" -->
+          <div class="plusMinusIcon" value="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons" value="{{this.id}}">add</i></a>
         </div>
 
 
@@ -33,12 +33,13 @@
 
 <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
 <script type="text/javascript">
-
-  $(".plusMinusIcon").on('click', function() {
-    var countryId = $(this).attr("id");
-    var route = "/add/country/:userId/" + countryId;
-    // console.log(countryId);
-
+console.log('ckickers')
+  $(document).on('click', '.material-icons', function() {
+    // console.log($(this))
+    var countryId = $(this)[0].attributes[1].value;
+    var route = "/add/country/1/" + countryId;
+    console.log(countryId);
+    // console.log('cklicked')
     $.ajax({
       url: route,
       type: 'GET',
