@@ -31,11 +31,36 @@
   {{/each}}
 </main>
 
+<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script type="text/javascript">
+
+  $(".plusMinusIcon").on('click', function() {
+    var countryId = $(this).attr("id");
+    var route = "/add/country/:userId/" + countryId;
+    // console.log(countryId);
+
+    $.ajax({
+      url: route,
+      type: 'GET',
+    })
+    .done(function(res) {
+      var results = res.data;
+
+
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+  })
+
+</script>
 
 
 
-
-================= DELETE ALL THIS TEXT BEFORE U RUN THE SERVER =================
+{{!-- ================= DELETE ALL THIS TEXT BEFORE U RUN THE SERVER =================
 Add jQuery and AJAX to hit the crud-controllers.js routes 
  use click listener for $(".plusMinusIcon"), which pulls out the countryId...
 Then pass that into AJAX and hit this route: "/add/country/:userId/:countryId"
@@ -47,4 +72,4 @@ and changing {{this.countryName}} to "stateName" and "cityName"
 and changing the AJAX call to "/add/state/:userId/:stateId" and "city"
 
 since we don't have user authencation yet, just pass in the number 1 or 2 for /:userId
-IGNORE THE addPlaces.handlebars file, it will get deleted after we merge to master later on
+IGNORE THE addPlaces.handlebars file, it will get deleted after we merge to master later on --}}

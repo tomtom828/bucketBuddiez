@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Facebook Login</title>
+  <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 <body>
   <h1>Facebook Login</h1>
-  <script>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript">
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '581851128669439',
@@ -42,6 +44,7 @@
           document.getElementById('login').style.visibility = 'hidden';
           getUserInfo();
           getPhoto();
+          getFriends();
         } else if (response.status === 'not_authorized') {
             document.getElementById('status').innerHTML = 'Not logged in';
         } else {
@@ -60,7 +63,7 @@
     // getting basic user info
     function getUserInfo() {
         FB.api('/me', function(response) {
- 
+
           var str="<b>Name</b> : "+response.name+"<br>";
               str +="<b>Gender: </b>"+response.gender+"<br>";
               str +="<b>Hometown: </b>"+response.hometown+"<br>";
@@ -68,20 +71,40 @@
               str +="<b>id: </b>"+response.id+"<br>";
 
           document.getElementById("status").innerHTML=str;
- 
+
         });
     }
 
     function getPhoto()
     {
       FB.api('/me/picture?type=normal', function(response) {
- 
+
           var str="<br/><b>Pic</b> : <img src='"+response.data.url+"'/>";
           document.getElementById("status").innerHTML+=str;
- 
+
       });
- 
+
     }
+
+    // Make api call to find user friends
+    function getFriends() {
+    FB.api('/100001259538717/friends', function(response) {
+      console.log(response);
+      // if(response.data) {
+      //   console.log(response.data);
+      //   for (var i = 0; i < response.data.length; i++) {
+      //     console.log(response.data[i])
+      //   }
+      // } else {
+      //     alert("Error!");
+      // }
+
+
+        // var str=response.data.friend.name +' has id:' + response.data.friend.id;
+
+        // document.getElementById("status").innerHTML=str;
+    });
+}
   </script>
 
   <div id="status"></div>
