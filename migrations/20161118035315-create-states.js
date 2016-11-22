@@ -11,6 +11,9 @@ module.exports = {
       stateName: {
         type: Sequelize.STRING
       },
+      stateImageURL: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
