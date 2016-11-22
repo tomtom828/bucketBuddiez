@@ -21,7 +21,7 @@
        
        <div>{{this.countryName}}</div>
                                                                 <!-- Image API LINK HERE -->
-        <div class="imgDiv" style="background-image: url('http://image-api/{{this.countryName}}/')"></div>
+        <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
           <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
         </div>
 
@@ -30,21 +30,3 @@
     </div>
   {{/each}}
 </main>
-
-
-
-
-
-================= DELETE ALL THIS TEXT BEFORE U RUN THE SERVER =================
-Add jQuery and AJAX to hit the crud-controllers.js routes 
- use click listener for $(".plusMinusIcon"), which pulls out the countryId...
-Then pass that into AJAX and hit this route: "/add/country/:userId/:countryId"
-this will pass it into my Update route in the crud-controllers.js file.
-
-Once this works, you can copy and paste this code into "addCites.handlebars" and "addStates.handlebars"
-changing "{{#each countries}}" to "{{#each states}} and "cities"
-and changing {{this.countryName}} to "stateName" and "cityName"
-and changing the AJAX call to "/add/state/:userId/:stateId" and "city"
-
-since we don't have user authencation yet, just pass in the number 1 or 2 for /:userId
-IGNORE THE addPlaces.handlebars file, it will get deleted after we merge to master later on

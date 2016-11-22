@@ -24,7 +24,7 @@ sequelizeConnection.sync()
       id: 1
     }
   }).then(function(user){
-    user.addCountry([189, 188, 156, 118, 48]);
+    user.addCountry([10, 9, 3, 7, 1]);
   });
 
 
@@ -34,7 +34,7 @@ sequelizeConnection.sync()
       id: 2
     }
   }).then(function(user){
-    user.addCountry([189, 188, 159, 119, 48]);
+    user.addCountry([10, 9, 2, 8, 1]);
   });
 
 
@@ -47,7 +47,7 @@ sequelizeConnection.sync()
       id: 1
     }
   }).then(function(user){
-    user.addState([6, 21, 43, 19, 5]);
+    user.addState([10, 9, 2, 8, 1]);
   });
 
 
@@ -57,7 +57,7 @@ sequelizeConnection.sync()
       id: 2
     }
   }).then(function(user){
-    user.addState([6, 47, 43, 9, 5]);
+    user.addState([10, 9, 2, 8, 1]);
   });
 
 
@@ -70,7 +70,7 @@ sequelizeConnection.sync()
       id: 1
     }
   }).then(function(user){
-    user.addCity([189, 188, 156, 118, 48]);
+    user.addCity([10, 9, 2, 8, 1]);
   });
 
 
@@ -80,7 +80,7 @@ sequelizeConnection.sync()
       id: 2
     }
   }).then(function(user){
-    user.addCity([189, 188, 159, 119, 48]);
+    user.addCity([10, 9, 2, 8, 1]);
   });
 
 })
