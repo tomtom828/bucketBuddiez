@@ -1,7 +1,7 @@
 
 #tilesContent {
 	text-align: center;
-	padding-top: 5px;
+	padding-top: 10px;
 }
 
 #tilesContent .card {
@@ -9,17 +9,17 @@
 	height: 300px;
 	/*float: left;*/
 	display: inline-block;
-	margin: 0;
+	margin: 8px;
 }
 
 #tilesContent .card .card-content {
 	width: 100%;
 	height: 100%;
-	padding: 5px;
+	padding: 8px;
 }
 #tilesContent .card .card-content .imgDiv {
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	background-position: 50% 50%;
 	background-size: cover;
 	background-repeat: no-repeat;

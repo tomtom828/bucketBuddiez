@@ -6,7 +6,7 @@
 
 <!-- Page Title -->
 <nav>
-  <div class="nav-wrapper blue-grey lighten-1">
+  <div class="nav-wrapper grey darken-2">
     <a href="#!" class="brand-logo">Country Teleporter</a>
   </div>
 </nav>
@@ -16,11 +16,9 @@
 
 <main id="tilesContent">
   {{#each countries}}
-    <div class="tile card blue-grey darken-1">
+    <div class="tile card grey darken-2">
       <div class="card-content white-text">
-       
        <div>{{this.countryName}}</div>
-                                                                <!-- Image API LINK HERE -->
         <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
           <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
         </div>
@@ -30,3 +28,29 @@
     </div>
   {{/each}}
 </main>
+<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script type="text/javascript">
+console.log('ckickers')
+  $(document).on('click', '.material-icons', function() {
+    console.log($(this))
+    var countryId = $(this)[0].attributes[1].value;
+    var route = "/add/country/1/" + countryId;
+    console.log(countryId);
+    // console.log('cklicked')
+    $.ajax({
+      url: route,
+      type: 'GET',
+    })
+    .done(function(res) {
+      var results = res.data;
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+  })
+</script>
+
+
