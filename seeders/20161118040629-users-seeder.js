@@ -5,8 +5,8 @@ module.exports = {
 
     // Add seeded Users to database (note that the date needs to be manually added here)
     return queryInterface.bulkInsert('Users', [
-      {firstName: "Tommy", lastName: "Thompson", facebookId: 100000544140061, createdAt: new Date(), updatedAt: new Date()},
-      {firstName: "Mario", lastName: "Aburto", facebookId: 100001259538717, createdAt: new Date(), updatedAt: new Date()},
+      {firstName: "Tommy", lastName: "Thompson", email: "tom@rutgers.edu", password: "tomPassword", createdAt: new Date(), updatedAt: new Date()},
+      {firstName: "Mario", lastName: "Aburto", email: "mario@rutgers.edu", password: "marioPassword", createdAt: new Date(), updatedAt: new Date()},
     ], {});
 
   },

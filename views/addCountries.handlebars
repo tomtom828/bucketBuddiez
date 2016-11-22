@@ -6,19 +6,30 @@
 
 <!-- Page Title -->
 <nav>
+<<<<<<< HEAD
   <div class="nav-wrapper grey darken-1">
+=======
+  <div class="nav-wrapper grey darken-2">
+>>>>>>> 88d5e6c7c1ccb5aa8e24b7bb7a34fbd2a47b986f
     <a href="#!" class="brand-logo">Country Teleporter</a>
   </div>
 </nav>
 <main id="tilesContent">
   {{#each countries}}
+<<<<<<< HEAD
   {{!-- <div class="col s12 m6 l3"> --}}
     <div class="tile card grey darken-1">
+=======
+    <div class="tile card grey darken-2">
+>>>>>>> 88d5e6c7c1ccb5aa8e24b7bb7a34fbd2a47b986f
       <div class="card-content white-text">
-       
        <div>{{this.countryName}}</div>
+<<<<<<< HEAD
                                                                 <!-- Image API LINK HERE -->
         <div class="imgDiv" style="image: url('http://image-api/{{this.countryName}}/')"></div>
+=======
+        <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
+>>>>>>> 88d5e6c7c1ccb5aa8e24b7bb7a34fbd2a47b986f
           <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
         </div>
       </div>
@@ -26,6 +37,30 @@
     {{!-- </div> --}}
   {{/each}}
 </main>
+<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script type="text/javascript">
+console.log('ckickers')
+  $(document).on('click', '.material-icons', function() {
+    console.log($(this))
+    var countryId = $(this)[0].attributes[1].value;
+    var route = "/add/country/1/" + countryId;
+    console.log(countryId);
+    // console.log('cklicked')
+    $.ajax({
+      url: route,
+      type: 'GET',
+    })
+    .done(function(res) {
+      var results = res.data;
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+  })
+</script>
 
 <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
 <script type="text/javascript">
@@ -73,6 +108,7 @@
   {{/each}}
 </main> --}}
 
+<<<<<<< HEAD
 {{!-- ================= DELETE ALL THIS TEXT BEFORE U RUN THE SERVER =================
 Add jQuery and AJAX to hit the crud-controllers.js routes 
  use click listener for $(".plusMinusIcon"), which pulls out the countryId...
@@ -86,3 +122,5 @@ and changing the AJAX call to "/add/state/:userId/:stateId" and "city"
 
 since we don't have user authencation yet, just pass in the number 1 or 2 for /:userId
 IGNORE THE addPlaces.handlebars file, it will get deleted after we merge to master later on --}}
+=======
+>>>>>>> 88d5e6c7c1ccb5aa8e24b7bb7a34fbd2a47b986f
