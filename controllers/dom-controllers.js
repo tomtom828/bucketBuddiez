@@ -2,7 +2,7 @@
 var express = require('express');
 var domRouter = express.Router();
 var models = require('../models'); // Pulls out the Models
-
+var path = require('path');
 
 // GET Routes to render pages
 // ----------------------------------------------------
@@ -17,10 +17,25 @@ domRouter.get('/', function (req, res){
 domRouter.get('/index', function (req, res){
 
   // Render hompage (no handlebars)
-  res.render('index');
+  res.sendFile(path.join(__dirname, '/../public/index.html'));
 
 });
 
+// Login Page (DOM Render)
+domRouter.get('/login', function (req, res){
+
+  // Render login (no handlebars)
+  res.sendFile(path.join(__dirname, '/../public/login.html'));
+
+});
+
+// Login Page (DOM Render)
+domRouter.get('/signup', function (req, res){
+
+  // Render login (no handlebars)
+  res.sendFile(path.join(__dirname, '/../public/signup.html'));
+
+});
 
 // User Sees All Countries in Database (DOM Render)
 domRouter.get('/view/countries', function (req, res){

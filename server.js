@@ -33,9 +33,6 @@ app.use('/', crudRouter);
 var findRouter = require('./controllers/find-controllers.js');
 app.use('/', findRouter);
 
-// Import Facebook controller
-var fbRouter = require('./controllers/fb-controllers.js');
-app.use('/', fbRouter);
 
 // --------------------------------------------------------------------
 
