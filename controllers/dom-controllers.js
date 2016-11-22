@@ -24,7 +24,7 @@ domRouter.get('/index', function (req, res){
 // Login Page (DOM Render)
 domRouter.get('/login', function (req, res){
 
-  // Render login (no handlebars)
+  // Render login page(no handlebars)
   res.sendFile(path.join(__dirname, '/../public/login.html'));
 
 });
@@ -32,7 +32,7 @@ domRouter.get('/login', function (req, res){
 // Login Page (DOM Render)
 domRouter.get('/signup', function (req, res){
 
-  // Render login (no handlebars)
+  // Render sign up page (no handlebars)
   res.sendFile(path.join(__dirname, '/../public/signup.html'));
 
 });
