@@ -1,10 +1,46 @@
 // Node Dependencies
 var express = require('express');
 var bodyParser = require('body-parser');
-var methodOverride = require('method-override')
+var methodOverride = require('method-override');
+var passport = require("passport");
+var Strategy = require("passport-facebook").Strategy;
+
+// Passport / Facebook Authentication Information
+passport.use(new Strategy({
+  clientID: process.env.CLIENT_ID || "581851128669439",
+  clientSecret: process.env.CLIENT_SECRET || "55ebf99283ab1293d73de27d5c9cfe56",
+  callbackURL: "http://localhost:3000/login/facebook/callback"
+},
+  function(accessToken, refreshToken, profile, cb) {
+    return cb(null, profile);
+  }));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+// Bring in the models
+var models = require('./models')
+
+// Sync models
+models.sequelize.sync();
 
 // Set up Express
 var app = express();
+
+// Incorporated a variety of Express packages.
+app.use(require("morgan")("combined"));
+app.use(require("cookie-parser")());
+app.use(require("body-parser").urlencoded({ extended: true }));
+app.use(require("express-session")({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+
+// Here we start our Passport process and initiate the storage of sessions (i.e. closing browser maintains user)
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + '/public'));
