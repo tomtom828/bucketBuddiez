@@ -22,7 +22,7 @@
 
       </div>
         <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn" href="#modal1">Find Travel Buddy</a>
+        <a class="waves-effect waves-light btn" href="#modal1" data-locationtype="country" data-locationname="{{this.countryName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
     </div>
 
     {{/each}}
@@ -47,7 +47,7 @@
 
       </div>
         <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn" href="#modal1">Find Travel Buddy</a>
+        <a class="waves-effect waves-light btn" href="#modal1" data-locationtype="state" data-locationname="{{this.stateName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
     </div>
 
     {{/each}}
@@ -72,7 +72,7 @@
 
       </div>
         <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn" href="#modal1">Find Travel Buddy</a>
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-locationtype="city" data-locationname="{{this.cityName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
     </div>
 
     {{/each}}
@@ -83,3 +83,92 @@
 
 
 <!-- Module to show shared Users -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4 id="modalTitle"></h4>
+      <table id="buddyTable">
+        <!-- Dynamically append users to table -->
+      </table>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Got It!</a>
+    </div>
+  </div>
+
+
+<script type="text/javascript" src="/assets/javascript/jquery-3.1.1.min.js"></script>
+ <!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+<!-- Modal click Listener -->
+<script type="text/javascript">
+ 
+      $(document).on('click', '.btn', function() {
+
+        // Get location name and append to modal title
+        var locationName = $(this).data("locationname");
+        $("#modalTitle").text("Your Travel Buddies for " + locationName);
+
+        // Get the location type and its Id
+        var locationType = $(this).data("locationtype")
+        var locationId = $(this).data("locationid")
+
+        // Get the current user's Id (to avoid showing their name in the list later)
+        var currentUserId = window.location.pathname;
+        currentUserId = currentUserId.split('/');
+        currentUserId = parseInt(currentUserId[3]);
+
+
+        // Query the correct Table in the DB
+        var queryURL = 'http://localhost:3000/find-all-users/' + locationType + '/' + locationId;
+        $.ajax({url: queryURL, method: 'GET'}).done(function(response){
+
+          console.log(response[0].Users)
+
+          // If there is only 1 user in the response, no other ppl want to go there... yet
+          if(response[0].Users.length == 1){
+            $('#buddyTable').empty();
+            $('#buddyTable').append("<p>Sorry! No other users want to travel here yet.</p>");
+          }
+          // Otherwise, Iterate through the JSON response and append all users
+          else{
+            $('#buddyTable').empty();
+            $('#buddyTable').append("<tr><td>Buddy Name</td><td>Buddy Email</td></tr>")
+
+            for(var i=0; i < response[0].Users.length; i++){
+
+              // Omit the JSON where the current user is (no need to see their own info)
+              if(response[0].Users[i].id != currentUserId){
+
+                // Create Entries for Buddy Table
+                var newRow = $('<tr>');
+
+                // Create New HTML Data Cells (done for each value from Firebase)
+                var buddyName = $('<td>');
+                var buddyEmail = $('<td>');
+
+                // Add text to the HTML Data Cells
+                buddyName.text(response[0].Users[i].firstName + " " + response[0].Users[i].lastName);
+                buddyEmail.text(response[0].Users[i].email);
+
+                // Append HTML Data Cells to the new Row
+                newRow.append(buddyName);
+                newRow.append(buddyEmail);
+
+                // Append new Row to the HTML Table
+                $('#buddyTable').append(newRow);
+
+              }
+
+            }
+
+          }
+
+        });
+        
+        
+         $('#modal1').openModal();
+      })
+
+
+</script>
