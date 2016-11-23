@@ -3,10 +3,59 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var passport = require("passport");
-var Strategy = require("passport-facebook").Strategy;
+var facebookStrategy = require("passport-facebook").Strategy;
+var localStrategy = require('passport-local').Strategy;
+
+// Passport localauthenticating information
+passport.use(new localStrategy({
+    //setting field name here
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function(email, password, done) {
+    /* get the username and password from the input arguments of the function */
+
+    // query the user from the database
+    // don't care the way I query from database, you can use
+    // any method to query the user from database
+    Users.find( { where: {email: email}} )
+      .success(function(user){
+
+        if(!user)
+          // if the user is not exist
+          return done(null, false, {message: "The user does not exist"});
+        else if(!hashing.compare(password, user.password))
+          // if password does not match
+          return done(null, false, {message: "Wrong password"});
+        else
+          // if everything is OK, return null as the error
+          // and the authenticated user
+          return done(null, user);
+
+      })
+      .error(function(err){
+        return done(err);
+      });
+  }
+));
+
+// maintaining authentication state in session
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  // query the current user from database
+  User.find(id)
+    .success(function(user){
+        done(null, user);
+    }).error(function(err){
+        done(new Error('User ' + id + ' does not exist'));
+    });
+});
 
 // Passport / Facebook Authentication Information
-passport.use(new Strategy({
+passport.use(new facebookStrategy({
   clientID: process.env.CLIENT_ID || "581851128669439",
   clientSecret: process.env.CLIENT_SECRET || "55ebf99283ab1293d73de27d5c9cfe56",
   callbackURL: "http://localhost:3000/login/facebook/callback"
