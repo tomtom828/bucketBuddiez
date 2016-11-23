@@ -20,14 +20,13 @@
 #tilesContent .card .card-content .imgDiv {
 	width: 100%;
 	height: 90%;
-	background-position: 50% 50%;
+	background-position: 100% 100%;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
-
 .plusMinusIcon {
 	position: absolute;
-	top: 10px;
+	top: 5px;
 	right: 8px;
 	width: 40px;
 	height: 40px;
@@ -50,3 +49,11 @@
 #tilesContent .tile.activeTile {
 	transform: scale(0.85);
 }
+/*#tilesContent .card-action{*/
+/*width: 100%;*/
+/*height: 20px;*/
+/*margin: 10px;*/
+/*}
+#modelbtn{
+margin-top: -35px;
+}*/
