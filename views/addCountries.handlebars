@@ -24,9 +24,44 @@
         <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
           <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
         </div>
-
+  
 
       </div>
+        <!-- Modal Trigger -->
+        <a class="waves-effect waves-light btn" href="#modal1">Find Travel Buddy</a>
     </div>
   {{/each}}
 </main>
+
+
+<script type="text/javascript" src="/assets/javascript/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+  $('.plusMinusIcon .btn').click(function () {
+    if (this.active) {
+      this.removeClass('activeTile');
+      this.addClass('darken-1');
+      this.removeClass('lighten-2');
+      this.find('.plusMinusIcon .btn .material-icons').html('add');
+    }
+    else {
+      this.addClass('activeTile');
+      this.removeClass('darken-1');
+      this.addClass('lighten-2');
+      this.find('.plusMinusIcon .btn .material-icons').html('remove');
+    }
+  });
+</script>
+
+
+
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
