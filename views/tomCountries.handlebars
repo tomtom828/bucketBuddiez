@@ -22,13 +22,13 @@
        <div>{{this.countryName}}</div>
 
         <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
-          <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
+          <div class="plusMinusIcon" data-locationtype="country" data-locationid="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
         </div>
   
 
       </div>
         <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn" href="#modal1">Find Travel Buddy</a>
+        <!-- <a class="waves-effect waves-light btn" href="#modal1">Find Travel Buddy</a> -->
     </div>
   {{/each}}
 </main>
@@ -38,14 +38,30 @@
 
 
 
+<!-- Add Location to Bucketlist -->
+<script type="text/javascript">
+ 
+  $(document).on('click', '.plusMinusIcon', function() {
 
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
+    // Get the location type and its Id
+    var locationType = $(this).data("locationtype")
+    var locationId = $(this).data("locationid")
+
+    // Get the current user's Id (to avoid showing their name in the list later)
+    var currentUserId = window.location.pathname;
+    currentUserId = currentUserId.split('/');
+    currentUserId = parseInt(currentUserId[3]);
+
+
+    // Query the correct Table in the DB (use window location so it works in heroku and localhost)
+    var queryURL = window.location.origin + '/add/' + locationType + '/' + currentUserId + '/' + locationId;
+
+    $.ajax({url: queryURL, method: 'GET'}).done(function(response){
+      // Refresh the page after AJAX call is done
+      window.location.reload();
+    })
+
+  });
+
+
+</script>

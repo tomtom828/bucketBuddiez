@@ -100,6 +100,7 @@
  <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
+
 <!-- Modal click Listener -->
 <script type="text/javascript">
  
@@ -119,8 +120,8 @@
         currentUserId = parseInt(currentUserId[3]);
 
 
-        // Query the correct Table in the DB
-        var queryURL = 'http://localhost:3000/find-all-users/' + locationType + '/' + locationId;
+        // Query the correct Table in the DB (use window location so it works in heroku and localhost)
+        var queryURL = window.location.origin + '/find-all-users/' + locationType + '/' + locationId;
         $.ajax({url: queryURL, method: 'GET'}).done(function(response){
 
           console.log(response[0].Users)
@@ -188,8 +189,8 @@
     currentUserId = parseInt(currentUserId[3]);
 
 
-    // Query the correct Table in the DB
-    var queryURL = 'http://localhost:3000/remove/' + locationType + '/' + currentUserId + '/' + locationId;
+    // Query the correct Table in the DB (use window location so it works in heroku and localhost)
+    var queryURL = window.location.origin + '/remove/' + locationType + '/' + currentUserId + '/' + locationId;
 
     $.ajax({url: queryURL, method: 'GET'}).done(function(response){
       // Refresh the page after AJAX call is done
