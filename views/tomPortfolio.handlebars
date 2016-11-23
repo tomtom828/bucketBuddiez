@@ -17,12 +17,12 @@
        <div>{{this.countryName}}</div>
                                                                 <!-- Image API LINK HERE -->
         <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
-          <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
+          <div class="plusMinusIcon" data-locationtype="country" data-locationid="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">remove</i></a>
         </div>
 
       </div>
         <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn" href="#modal1" data-locationtype="country" data-locationname="{{this.countryName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+        <a class="waves-effect waves-light btn buddyButton" href="#modal1" data-locationtype="country" data-locationname="{{this.countryName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
     </div>
 
     {{/each}}
@@ -42,12 +42,12 @@
        <div>{{this.stateName}}</div>
                                                                 <!-- Image API LINK HERE -->
         <div class="imgDiv" style="background-image: url('{{this.stateImageURL}}')"></div>
-          <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
+          <div class="plusMinusIcon" data-locationtype="state" data-locationid="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">remove</i></a>
         </div>
 
       </div>
         <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn" href="#modal1" data-locationtype="state" data-locationname="{{this.stateName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+        <a class="waves-effect waves-light btn buddyButton" href="#modal1" data-locationtype="state" data-locationname="{{this.stateName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
     </div>
 
     {{/each}}
@@ -67,12 +67,12 @@
        <div>{{this.cityName}}</div>
                                                                 <!-- Image API LINK HERE -->
         <div class="imgDiv" style="background-image: url('{{this.cityImageURL}}')"></div>
-          <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
+          <div class="plusMinusIcon" data-locationtype="city" data-locationid="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">remove</i></a>
         </div>
 
       </div>
         <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-locationtype="city" data-locationname="{{this.cityName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+        <a class="waves-effect waves-light btn modal-trigger buddyButton" href="#modal1" data-locationtype="city" data-locationname="{{this.cityName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
     </div>
 
     {{/each}}
@@ -103,7 +103,7 @@
 <!-- Modal click Listener -->
 <script type="text/javascript">
  
-      $(document).on('click', '.btn', function() {
+      $(document).on('click', '.buddyButton', function() {
 
         // Get location name and append to modal title
         var locationName = $(this).data("locationname");
@@ -169,6 +169,34 @@
         
          $('#modal1').openModal();
       })
+
+</script>
+
+
+<!-- Remove Location from Bucketlist -->
+<script type="text/javascript">
+ 
+  $(document).on('click', '.plusMinusIcon', function() {
+
+    // Get the location type and its Id
+    var locationType = $(this).data("locationtype")
+    var locationId = $(this).data("locationid")
+
+    // Get the current user's Id (to avoid showing their name in the list later)
+    var currentUserId = window.location.pathname;
+    currentUserId = currentUserId.split('/');
+    currentUserId = parseInt(currentUserId[3]);
+
+
+    // Query the correct Table in the DB
+    var queryURL = 'http://localhost:3000/remove/' + locationType + '/' + currentUserId + '/' + locationId;
+
+    $.ajax({url: queryURL, method: 'GET'}).done(function(response){
+      // Refresh the page after AJAX call is done
+      window.location.reload();
+    })
+
+  });
 
 
 </script>

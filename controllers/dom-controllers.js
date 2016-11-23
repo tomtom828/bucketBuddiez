@@ -49,7 +49,7 @@ domRouter.get('/view/countries', function (req, res){
     var hbsObject = { countries: data };
 
     // Render *addPlaces* template with *countries*
-    res.render('addCountries', hbsObject);
+    res.render('tomCountries', hbsObject);
     // res.json(hbsObject);
 
   });
