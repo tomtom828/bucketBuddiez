@@ -8,19 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Compiled and minified Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    {{!-- Materialize icons --}}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified Materialize  JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <!-- Custom Styling (in public/assets folder) -->
     <link rel="stylesheet" href="/assets/css/style.css">
-
     <!-- TILES CSS -->
+    <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/tiles.css">
     <link rel="stylesheet" href="/assets/css/materialize/materialize.min.css">
     <link rel="stylesheet" href="/assets/css/font-awesome/font-awesome.min.css">
-    <!--<link rel="stylesheet" href="Styles/materialize/ghpages-materialize.css">-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" href="Styles/materialize/ghpages-materialize.css">
 </head>
 
 <body>
@@ -29,26 +29,18 @@
         {{{body}}}
     </main>
     <!-- Add in Page Footer-->
-     <footer class="page-footer">
-          <div class="footer-copyright">
-            <div class="container">
-            © 2016 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
-        </footer>
+    <footer>
+        <img class="responsive-img" src="/assets/images/footer.png">
+        © 2016 Copyright Bucket Buddiez
+    </footer>
     <!-- Link in jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <!-- Link in Local JavaScript (for in-browser button clicks) -->
     <script src="/assets/javascript/buttonClicks.js"></script>
-
-
     <!-- TILES JAVASCRIPT -->
     <script type="text/javascript" src="/assets/javascript/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="/assets/javascript/materialize.min.js"></script>
-    <!-- <script type="text/javascript" src="/assets/javascript/tiler.js"></script> -->
-    <!-- <script type="text/javascript" src="/assets/javascript/sample.js"></script> -->
-
+    {{!-- // <script type="text/javascript" src="/assets/javascript/tiler.js"></script> --}}
+    <script type="text/javascript" src="/assets/javascript/sample.js"></script>
 </body>
-
 </html>
