@@ -112,8 +112,8 @@ domRouter.get('/view/bucketlist/:userId', function(req, res){
     var hbsObject = { bucketlist: data };
 
     // Render *addPlaces* template with *states*
-    //res.render('viewAccount', hbsObject);
-    res.json(hbsObject);
+    res.render('viewAccount', hbsObject);
+    // res.json();
 
   });
 
