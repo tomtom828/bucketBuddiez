@@ -1,0 +1,7 @@
+.container {
+  height: 350px;
+  width: 300px;
+  background: transparent;
+  float: center;
+  /*background-image: url(images/dest1.jpg);*/
+}
