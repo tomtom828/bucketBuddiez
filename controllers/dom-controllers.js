@@ -250,9 +250,9 @@ domRouter.get('/view/bucketlist/:userId', function(req, res){
     // Pass the returned data into a Handlebars object
     var hbsObject = { bucketlist: data };
 
-    // Render *addPlaces* template with *states*
-    res.render('tomPortfolio', hbsObject);
-    // res.json(hbsObject);
+    // Render porfolio page
+    res.render('viewAccount', hbsObject);
+
 
   });
 
