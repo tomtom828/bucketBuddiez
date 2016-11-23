@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="assets/css/materialize/materialize.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<!-- <div id="profileHeader" class="card"> -->
+    <nav>
+        <div class="nav-wrapper blue-grey lighten-1">
+          <a href="#!" class="brand-logo">Sign Up</a>
+        </div>
+    </nav>
+
+<body>
+    <script>
+    function validateForm() {
+        var x = document.forms["myForm"]["fname"].value;
+        if (x == "") {
+            alert("All fields must be filled out");
+            return false;
+        }
+    }
+    </script>
+    <form name="myForm" action="../profile.html" onsubmit="return validateForm()" method="post">
+        <!-- <div class="row"> -->
+        <div class="container">
+            <div class="row">
+                <div class="input-field col s6">
+                   First Name: <input id="first_name" type="text" class="validate">
+                    <label for="first_name"></label>
+                </div>
+                <div class="input-field col s6">
+                   Last Name: <input id="last_name" type="text" class="validate">
+                    <label for="last_name"></label>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                  Password: <input id="password" type="password" class="validate">
+                    <label for="password"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                  Email:<input id="email" type="email" class="validate">
+                    <label for="email"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                </div>
+                <input type="submit" value="Submit">
+            </div>
+    </form>
+</body>
+</html>
