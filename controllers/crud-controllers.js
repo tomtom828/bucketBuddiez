@@ -44,8 +44,6 @@ crudRouter.get('/:action/country/:userId/:countryId', function(req, res){
       user.addCountry(req.params.countryId)
       .then(function(data){
         res.json(data);
-        // Redirect to country page ?
-        // res.redirect('/view/countries');
       });
     });
 
@@ -62,8 +60,6 @@ crudRouter.get('/:action/country/:userId/:countryId', function(req, res){
       user.removeCountry(req.params.countryId)
       .then(function(data){
         res.json(data);
-        // Redirect to bucket list page ?
-        // res.redirect('/view/bucketlist');
       });
     });
 
@@ -96,8 +92,6 @@ crudRouter.get('/:action/state/:userId/:stateId', function(req, res){
       user.addState(req.params.stateId)
       .then(function(data){
         res.json(data);
-        // Redirect to states page ?
-        // res.redirect('/view/states');
       });
     });
 
@@ -114,8 +108,6 @@ crudRouter.get('/:action/state/:userId/:stateId', function(req, res){
       user.removeState(req.params.stateId)
       .then(function(data){
         res.json(data);
-        // Redirect to bucket list page ?
-        // res.redirect('/view/bucketlist');
       });
     });
 
@@ -147,8 +139,6 @@ crudRouter.get('/:action/city/:userId/:cityId', function(req, res){
       user.addCity(req.params.cityId)
       .then(function(data){
         res.json(data);
-        // Redirect to states page ?
-        // res.redirect('/view/cities');
       });
     });
 
@@ -165,8 +155,6 @@ crudRouter.get('/:action/city/:userId/:cityId', function(req, res){
       user.removeCity(req.params.cityId)
       .then(function(data){
         res.json(data);
-        // Redirect to bucket list page ?
-        // res.redirect('/view/bucketlist');
       });
     });
 

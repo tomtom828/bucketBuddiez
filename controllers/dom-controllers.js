@@ -37,20 +37,66 @@ domRouter.get('/signup', function (req, res){
 
 });
 
-// User Sees All Countries in Database (DOM Render)
-domRouter.get('/view/countries', function (req, res){
+// User Sees All Countries in Database that they can add (DOM Render)
+domRouter.get('/view/countries/:userId', function (req, res){
 
-  // Query Database for all Countries
+  // Find all Countries tied to the current user (so we can exclude them later)
   models.Countries.findAll({
-    order: [['countryName', 'ASC']]
-  }).then(function(data){
+    include: [{
+      model: models.Users,
+      where: {id: req.params.userId}
+    }]
+  }).then(function(excludeData){
 
-    // Pass the returned data into a Handlebars object
-    var hbsObject = { countries: data };
+      // Get Ids of all the countries the user has (so we can exclude them)
+      var excludeTheseIds = [];
+      for(var i=0; i<excludeData.length; i++){
+        excludeTheseIds.push(excludeData[i].id);
+      }
+      console.log(excludeTheseIds)
 
-    // Render *addPlaces* template with *countries*
-    res.render('addCountries', hbsObject);
-    // res.json(hbsObject);
+      // Find all Countries in DB (including the ones the user alreay has)
+      models.Countries.findAll({}).then(function(allData){
+
+        // Get Ids of all entries in DB
+        var allIds = [];
+        for(var i=0; i<allData.length; i++){
+          allIds.push(allData[i].id);
+        }
+
+        // Find all Ids that the user does NOT have by comparing the arrays 
+        // This has to be done b/c Sequelize has no easy exclude multiple Ids feature
+        var displayTheseIds = [];
+        for(var i=0; i < allIds.length; i++){
+          var pushToUser = true;
+          for(var j=0; j < excludeTheseIds.length; j++){
+            // Do not add any ids that the user already has
+            if(allIds[i] == excludeTheseIds[j]){
+              pushToUser = false;
+            }
+          }
+          // If the user does not have the id, push it to the dispay array
+          if(pushToUser){
+            displayTheseIds.push(allIds[i]);
+          }
+        }
+        console.log(displayTheseIds)
+
+        // Finally, get all countries that are unique to the user and display them to the DOM
+        models.Countries.findAll({
+          order: [['countryName', 'ASC']],
+          where: {id: displayTheseIds}
+        }).then(function(data){
+
+          // Pass the returned data into a Handlebars object
+          var hbsObject = { countries: data };
+
+          // Render *addPlaces* template with *countries*
+          res.render('tomCountries', hbsObject);
+
+      });
+
+    });
 
   });
 
@@ -58,19 +104,65 @@ domRouter.get('/view/countries', function (req, res){
 
 
 // User Sees All States in Database (DOM Render)
-domRouter.get('/view/states', function (req, res){
+domRouter.get('/view/states/:userId', function (req, res){
 
-  // Query Database for all States
+  // Find all States tied to the current user (so we can exclude them later)
   models.States.findAll({
-    order: [['stateName', 'ASC']]
-  }).then(function(data){
+    include: [{
+      model: models.Users,
+      where: {id: req.params.userId}
+    }]
+  }).then(function(excludeData){
 
-    // Pass the returned data into a Handlebars object
-    var hbsObject = { states: data };
+      // Get Ids of all the states the user has (so we can exclude them)
+      var excludeTheseIds = [];
+      for(var i=0; i<excludeData.length; i++){
+        excludeTheseIds.push(excludeData[i].id);
+      }
+      console.log(excludeTheseIds)
 
-    // Render *addStates* template with *states*
-    res.render('addStates', hbsObject);
-    // res.json(hbsObject);
+      // Find all States in DB (including the ones the user alreay has)
+      models.States.findAll({}).then(function(allData){
+
+        // Get Ids of all entries in DB
+        var allIds = [];
+        for(var i=0; i<allData.length; i++){
+          allIds.push(allData[i].id);
+        }
+
+        // Find all Ids that the user does NOT have by comparing the arrays 
+        // This has to be done b/c Sequelize has no easy exclude multiple Ids feature
+        var displayTheseIds = [];
+        for(var i=0; i < allIds.length; i++){
+          var pushToUser = true;
+          for(var j=0; j < excludeTheseIds.length; j++){
+            // Do not add any ids that the user already has
+            if(allIds[i] == excludeTheseIds[j]){
+              pushToUser = false;
+            }
+          }
+          // If the user does not have the id, push it to the dispay array
+          if(pushToUser){
+            displayTheseIds.push(allIds[i]);
+          }
+        }
+        console.log(displayTheseIds)
+
+        // Finally, get all states that are unique to the user and display them to the DOM
+        models.States.findAll({
+          order: [['stateName', 'ASC']],
+          where: {id: displayTheseIds}
+        }).then(function(data){
+
+          // Pass the returned data into a Handlebars object
+          var hbsObject = { states: data };
+
+          // Render *addPlaces* template with *countries*
+          res.render('addStates', hbsObject);
+
+      });
+
+    });
 
   });
 
@@ -78,19 +170,66 @@ domRouter.get('/view/states', function (req, res){
 
 
 // User Sees All Cities in Database (DOM Render)
-domRouter.get('/view/cities', function (req, res){
+domRouter.get('/view/cities/:userId', function (req, res){
 
-  // Query Database for all Cities
+  // Find all Cities tied to the current user (so we can exclude them later)
   models.Cities.findAll({
-    order: [['cityName', 'ASC']]
-  }).then(function(data){
+    include: [{
+      model: models.Users,
+      where: {id: req.params.userId}
+    }]
+  }).then(function(excludeData){
 
-    // Pass the returned data into a Handlebars object
-    var hbsObject = { cities: data };
+      // Get Ids of all the states the user has (so we can exclude them)
+      var excludeTheseIds = [];
+      for(var i=0; i<excludeData.length; i++){
+        excludeTheseIds.push(excludeData[i].id);
+      }
+      console.log(excludeTheseIds)
 
-    // Render *addCities* template with *cities*
-    res.render('addCities', hbsObject);
-    // res.json(hbsObject);
+      // Find all States in DB (including the ones the user alreay has)
+      models.Cities.findAll({}).then(function(allData){
+
+        // Get Ids of all entries in DB
+        var allIds = [];
+        for(var i=0; i<allData.length; i++){
+          allIds.push(allData[i].id);
+        }
+
+        // Find all Ids that the user does NOT have by comparing the arrays 
+        // This has to be done b/c Sequelize has no easy exclude multiple Ids feature
+        var displayTheseIds = [];
+        for(var i=0; i < allIds.length; i++){
+          var pushToUser = true;
+          for(var j=0; j < excludeTheseIds.length; j++){
+            // Do not add any ids that the user already has
+            if(allIds[i] == excludeTheseIds[j]){
+              pushToUser = false;
+            }
+          }
+          // If the user does not have the id, push it to the dispay array
+          if(pushToUser){
+            displayTheseIds.push(allIds[i]);
+          }
+        }
+        console.log(displayTheseIds)
+
+        // Finally, get all cities that are unique to the user and display them to the DOM
+        models.Cities.findAll({
+          order: [['stateName', 'ASC']],
+          where: {id: displayTheseIds}
+        }).then(function(data){
+
+          // Pass the returned data into a Handlebars object
+          var hbsObject = { states: data };
+
+          // Render *addPlaces* template with *countries*
+          res.render('addCities', hbsObject);
+
+      });
+
+    });
+
   });
 
 });
@@ -111,9 +250,9 @@ domRouter.get('/view/bucketlist/:userId', function(req, res){
     // Pass the returned data into a Handlebars object
     var hbsObject = { bucketlist: data };
 
-    // Render *addPlaces* template with *states*
+    // Render porfolio page
     res.render('viewAccount', hbsObject);
-    // res.json();
+
 
   });
 
