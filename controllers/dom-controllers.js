@@ -92,7 +92,7 @@ domRouter.get('/view/countries/:userId', function (req, res){
           var hbsObject = { countries: data };
 
           // Render *addPlaces* template with *countries*
-          res.render('tomCountries', hbsObject);
+          res.render('addCountries', hbsObject);
 
       });
 
@@ -216,12 +216,12 @@ domRouter.get('/view/cities/:userId', function (req, res){
 
         // Finally, get all cities that are unique to the user and display them to the DOM
         models.Cities.findAll({
-          order: [['stateName', 'ASC']],
+          order: [['cityName', 'ASC']],
           where: {id: displayTheseIds}
         }).then(function(data){
 
           // Pass the returned data into a Handlebars object
-          var hbsObject = { states: data };
+          var hbsObject = { cities: data };
 
           // Render *addPlaces* template with *countries*
           res.render('addCities', hbsObject);
@@ -252,7 +252,7 @@ domRouter.get('/view/bucketlist/:userId', function(req, res){
 
     // Render porfolio page
     res.render('viewAccount', hbsObject);
-
+    // res.json(hbsObject)
 
   });
 

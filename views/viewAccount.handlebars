@@ -1,2 +1,147 @@
-<!-- This will be the {{body}} of the user's account, where they see all database tiles and click on them to see matches -->
-<!-- chop down the test_viewAccount.html file for this -->
+<!-- This is the page where the user can view/edit their bucketlist and find travel buddies -->
+
+
+<!-- Page Title -->
+<div id="profileHeader" class="card">
+  <nav>
+    <div class="nav-wrapper grey darken-2">
+      <a href="#!" class="brand-logo">Your Bucket list</a>
+    </div>
+  </nav>
+</div>
+
+
+<!-- User Profile -->
+<div id="profileMainRow">
+  <div class="card grey darken-2 profileImage">
+    <div class="card-content">
+      <div id=""></div>
+    </div>
+  </div>
+  <div class="card grey darken-2 profileDetails">
+    <div class="card-content">
+      {{#each bucketlist}}
+        <p><b>Name:</b> {{firstName}} {{lastName}}</p>
+        <p><b>Email:</b> {{email}}</p>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+
+<!-- Page Content Container -->
+<div id="bottomContainer">
+
+
+  <!-- Countries Container -->
+  <div class="card grey darken-2" id="countryContainer">
+  <div style="font-size: 30px;">Countries</div>
+
+    <!-- Dynamically Render Country Tiles -->
+    <main id="tilesContent">
+      {{#each bucketlist}}
+        {{#each Countries}}
+
+        <div class="tile card blue-grey darken-1">
+          <div class="card-content white-text">
+           <div>{{this.countryName}}</div>
+                                                                    <!-- Image API LINK HERE -->
+            <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
+              <div class="plusMinusIcon" data-locationtype="country" data-locationid="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">remove</i></a>
+            </div>
+
+          </div>
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn buddyButton" href="#modal1" data-locationtype="country" data-locationname="{{this.countryName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+        </div>
+
+        {{/each}}
+      {{/each}}
+    </main>
+  </div>
+
+
+  <!-- States Container -->
+  <div class="card grey darken-2" id="stateContainer">
+  <div style="font-size: 30px;">States</div>
+
+    <!-- Dynamically Render State Tiles -->
+    <main id="tilesContent">
+      {{#each bucketlist}}
+        {{#each States}}
+
+        <div class="tile card blue-grey darken-1">
+          <div class="card-content white-text">
+           <div>{{this.stateName}}</div>
+                                                                    <!-- Image API LINK HERE -->
+            <div class="imgDiv" style="background-image: url('{{this.stateImageURL}}')"></div>
+              <div class="plusMinusIcon" data-locationtype="state" data-locationid="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">remove</i></a>
+            </div>
+
+          </div>
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn buddyButton" href="#modal1" data-locationtype="state" data-locationname="{{this.stateName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+        </div>
+
+        {{/each}}
+      {{/each}}
+    </main>
+  </div>
+
+
+  <!-- Cities Container -->
+  <div class="card grey darken-2" id="cityContainer">
+  <div style="font-size: 30px;">Cities</div>
+
+    <!-- Dynamically Render City Tiles -->
+    <main id="tilesContent">
+      {{#each bucketlist}}
+        {{#each Cities}}
+
+        <div class="tile card blue-grey darken-1">
+          <div class="card-content white-text">
+           <div>{{this.cityName}}</div>
+                                                                    <!-- Image API LINK HERE -->
+            <div class="imgDiv" style="background-image: url('{{this.cityImageURL}}')"></div>
+              <div class="plusMinusIcon" data-locationtype="city" data-locationid="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">remove</i></a>
+            </div>
+
+          </div>
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn modal-trigger buddyButton" href="#modal1" data-locationtype="city" data-locationname="{{this.cityName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+        </div>
+
+        {{/each}}
+      {{/each}}
+    </main>
+  </div>
+
+
+</div>
+
+
+<!-- Module to show shared Users -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4 id="modalTitle"></h4>
+    <table id="buddyTable">
+      <!-- Dynamically append users to table -->
+    </table>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Got It!</a>
+  </div>
+</div>
+
+
+<!-- Link in jQuery -->
+<script type="text/javascript" src="/assets/javascript/jquery-3.1.1.min.js"></script>
+
+<!-- Compiled and minified JavaScript (for modal) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+<!-- Modal click Listener -->
+<script type="text/javascript" src="/assets/javascript/bucketlist-find-buddy.js"></script>
+
+<!-- Remove Location from Bucketlist -->
+<script type="text/javascript" src="/assets/javascript/bucketlist-remove-location.js"></script>

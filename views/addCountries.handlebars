@@ -1,60 +1,33 @@
-<!-- This is the page that the user can use to add countries to their bucket list -->
+<!-- This is the page that the user can use to add countries to their bucket list --> 
+
 <!-- Page Title -->
 <nav>
-    <div class="nav-wrapper grey darken-2">
-        <a href="#!" class="brand-logo">Country Teleporter</a>
-    </div>
+  <div class="nav-wrapper blue-grey lighten-1">
+    <a href="#!" class="brand-logo">Country Teleporter</a>
+  </div>
 </nav>
+
+
 <!-- Dynamically Render Country Tiles -->
 <main id="tilesContent">
-    {{#each countries}}
-    <div class="card grey darken-2">
-        <div class="card-content white-text">
-            <div>{{this.countryName}}</div>
-            <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
-            <div id="{{this.id}}" class="plusMinusIcon"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
-            </div>
+  {{#each countries}}
+    <div class="tile card blue-grey darken-1">
+      <div class="card-content white-text">
+       
+       <div>{{this.countryName}}</div>
+
+        <div class="imgDiv" style="background-image: url('{{this.countryImageURL}}')"></div>
+          <div class="plusMinusIcon" data-locationtype="country" data-locationid="{{this.id}}"><a class="btn btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
         </div>
   
-
       </div>
-        <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn" href="#modal1">Find Travel Buddy</a>
-
     </div>
-    {{/each}}
+  {{/each}}
 </main>
 
 
-
+<!-- Link in jQuery -->
 <script type="text/javascript" src="/assets/javascript/jquery-3.1.1.min.js"></script>
-<script type="text/javascript">
-  $('.plusMinusIcon .btn').click(function () {
-    if (this.active) {
-      this.removeClass('activeTile');
-      this.addClass('darken-1');
-      this.removeClass('lighten-2');
-      this.find('.plusMinusIcon .btn .material-icons').html('add');
-    }
-    else {
-      this.addClass('activeTile');
-      this.removeClass('darken-1');
-      this.addClass('lighten-2');
-      this.find('.plusMinusIcon .btn .material-icons').html('remove');
-    }
-  });
-</script>
 
-
-
-
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
+<!-- Add Location to Bucketlist -->
+<script type="text/javascript" src="/assets/javascript/add-countries-states-cities.js"></script>
