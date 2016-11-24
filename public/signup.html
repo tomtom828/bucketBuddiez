@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="assets/css/signup.css">
 </head>
 <!-- <div id="profileHeader" class="card"> -->
-    <nav>
-        <div class="nav-wrapper">               
-             <a href="#" class="brand-logo">Sign Up</a>
-        </div>
-    </nav>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Bucket Buddiez</a>
+    </div>
+</nav>
 
 <body>
-
     <script>
     function validateForm() {
         var x = document.forms["myForm"]["fname"].value;
@@ -26,14 +25,17 @@
     </script>
     <form name="myForm" action="../profile.html" onsubmit="return validateForm()" method="post">
         <!-- <div class="row"> -->
-        <div class="container";>
+        <div class="container" ;>
+            <h3>Sign Up</h3>
             <div class="row">
                 <div class="input-field col s6">
-                   First Name: <input id="first_name" type="text" class="validate">
+                    First Name:
+                    <input id="first_name" type="text" class="validate" required>
                     <label for="first_name"></label>
                 </div>
                 <div class="input-field col s6">
-                   Last Name: <input id="last_name" type="text" class="validate">
+                    Last Name:
+                    <input id="last_name" type="text" class="validate" required>
                     <label for="last_name"></label>
                 </div>
             </div>
@@ -41,22 +43,27 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                  Password: <input id="password" type="password" class="validate">
+                    Password:
+                    <input id="password" type="password" class="validate" required>
                     <label for="password"></label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                  Email:<input id="email" type="email" class="validate">
+                    Email:
+                    <input id="email" type="email" class="validate" required>
                     <label for="email"></label>
                 </div>
             </div>
             <div class="row">
                 <div class="col s12">
                 </div>
-                <input type="submit" value="Submit">
+                <input class="btn" type="submit" value="Submit">
             </div>
-            </div>
+        </div>
     </form>
 </body>
+</body>
+
 </html>
+
