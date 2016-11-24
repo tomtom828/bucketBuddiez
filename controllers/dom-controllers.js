@@ -3,6 +3,14 @@ var express = require('express');
 var domRouter = express.Router();
 var models = require('../models'); // Pulls out the Models
 var path = require('path');
+var passport = require("passport");
+
+function signInUser(req, res, error, user, info){
+  if(error) { return res.status(500).json(error); }
+  if(!user) { return res.status(401).json(info.message); }
+  var userId = user.id;
+  res.redirect('/index');
+}
 
 // GET Routes to render pages
 // ----------------------------------------------------
@@ -21,15 +29,85 @@ domRouter.get('/index', function (req, res){
 
 });
 
+
+
 // Login Page (DOM Render)
 domRouter.get('/login', function (req, res){
 
-  // Render login page(no handlebars)
+  // Render sign up page (no handlebars)
   res.sendFile(path.join(__dirname, '/../public/login.html'));
 
 });
 
-// Login Page (DOM Render)
+domRouter.post('/user/login', function(req, res, next) {
+  passport.authenticate('local', function(error, user, info) {
+    signInUser(req, res, error, user, info);
+  })(req, res, next);
+});
+
+
+// domRouter.get('/logout', function(req, res){
+//   if(req.isAuthenticated()){
+//     req.logout();
+//     req.session.messages = req.i18n.__("Log out successfully");
+//   }
+//     res.redirect('/');
+// })
+
+domRouter.post('/user/signup', function(req, res, next){
+  console.log(req.body.username, req.body.password);
+  passport.authenticate('local-signup', function(error, user, info) {
+    signInUser(req, res, error, user, info);
+  })(req, res, next);
+});
+
+domRouter.get('/user/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/index');
+});
+
+// Facebook
+domRouter.get('/login/facebook', passport.authenticate('facebook'));
+
+domRouter.get('/login/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/login' }),
+
+  function(req, res) {
+    res.redirect("/view/bucketlist/2");
+});
+
+
+// User Sees All Bucket List entries in the Database (DOM Render)
+domRouter.get('/view/bucketlist/:userId',
+  require("connect-ensure-login").ensureLoggedIn(),
+  function(req, res){
+
+  // Query Database for all the user's liked countries (associated via the "___likes" tables)
+  models.Users.findAll({
+    where: {
+      id: req.params.userId // OR req.body.userId for FORM ACTION
+    },
+    include: [models.Countries, models.States, models.Cities],
+    // order: [[models.Countries.countryName, 'ASC'],[models.States.stateName, 'ASC'],[models.Cities.cityName, 'ASC']]
+  }).then(function(data){
+
+    // Pass the returned data into a Handlebars object
+    var hbsObject = { bucketlist: data };
+
+    // Render *addPlaces* template with *states*
+    //res.render('viewAccount', hbsObject);
+    res.json(hbsObject);
+
+  });
+
+});
+
+
+
+
+
+
+// Sign up Page (DOM Render)
 domRouter.get('/signup', function (req, res){
 
   // Render sign up page (no handlebars)
@@ -235,6 +313,8 @@ domRouter.get('/view/cities/:userId', function (req, res){
 });
 
 
+<<<<<<< HEAD
+=======
 // User Sees All Bucket List entries in the Database (DOM Render)
 domRouter.get('/view/bucketlist/:userId', function(req, res){
 
@@ -258,6 +338,7 @@ domRouter.get('/view/bucketlist/:userId', function(req, res){
 
 });
 
+>>>>>>> master
 // ----------------------------------------------------
 
 

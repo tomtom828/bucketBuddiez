@@ -1,17 +1,27 @@
-// Node Dependencies
-var express = require('express');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override')
+// set up ======================================================================
+// get all the tools we need
+var express  = require('express');
+var app      = express();
+var port     = process.env.PORT || 3000;
 
-// Set up Express
-var app = express();
+var passport = require('passport');
+
+var morgan       = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
+
+// Bring in the models
+var models = require('./models');
 
 //Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + '/public'));
 // app.use(express.static('public'));
 
-// Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.urlencoded({ extended: true})); // get information from html forms
 
 // Handlebars
 var exphbs = require('express-handlebars');
@@ -19,7 +29,15 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 
-// ------------------------ Routes/Controllers ------------------------
+// Sync models
+models.sequelize.sync();
+
+// required for passport
+require('./config/passport')(app);
+app.use(session({ secret: 'mysecret' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 
 // Import DOM controller
 var domRouter = require('./controllers/dom-controllers.js');
@@ -33,11 +51,6 @@ app.use('/', crudRouter);
 var findRouter = require('./controllers/find-controllers.js');
 app.use('/', findRouter);
 
-
-// --------------------------------------------------------------------
-
-// Open Server
-var port = process.env.PORT || 3000;
-app.listen(port, function(){
-  console.log('Listening on port ' + port);
-});
+// launch ======================================================================
+app.listen(port);
+console.log('The magic happens on port ' + port);
