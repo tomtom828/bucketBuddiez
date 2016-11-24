@@ -5,14 +5,15 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set NODE_ENV=production && node server.js"
+    "start": "set NODE_ENV=production && node server.js",
+    "setupDB": "sequelize db:migrate && sequelize db:seed:all && node db/seed-user-likes.js"
   },
   "engines": {
     "node": "4.1.1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tomtom28/bucketBuddiez.git" 
+    "url": "git+https://github.com/tomtom28/bucketBuddiez.git"
   },
   "author": "tomtom28",
   "license": "ISC",
@@ -21,11 +22,20 @@
   },
   "homepage": "https://github.com/tomtom28/bucketBuddiez#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.14.2",
+    "fb": "^1.1.1",
     "method-override": "^2.3.6",
+    "morgan": "^1.7.0",
     "mysql": "^2.12.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0",
     "sequelize": "^3.25.0",
     "sequelize-cli": "^2.4.0"
   }

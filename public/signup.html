@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>Sign up</title>
     <link rel="stylesheet" href="assets/css/materialize/materialize.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/signup.css">
@@ -14,7 +15,7 @@
 </nav>
 
 <body>
-    <script>
+   <!--  <script>
     function validateForm() {
         var x = document.forms["myForm"]["fname"].value;
         if (x == "") {
@@ -23,7 +24,8 @@
         }
     }
     </script>
-    <form name="myForm" action="../profile.html" onsubmit="return validateForm()" method="post">
+ -->    
+      <form name ="myForm" action="user/signup" onsubmit="return validateForm()" method="post">
         <!-- <div class="row"> -->
         <div class="container" ;>
             <h3>Sign Up</h3>
@@ -66,4 +68,22 @@
 </body>
 
 </html>
+
+
+<!-- <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up</title>
+</head>
+<body>
+  <h1>Sign up</h1>
+  <a href="/login/facebook"><button type="button">Authenticate with Facebook</button></a>
+  <br>
+  <form action="user/signup" method="post">
+    <input type="text" id="username" name="email">
+    <input type="password" id="password" name="password">
+  <button type="submit">Submit</button>
+  </form>
+</body>
+</html> -->
 
