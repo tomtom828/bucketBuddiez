@@ -1,59 +1,148 @@
-
 #tilesContent {
-	text-align: center;
-	padding-top: 10px;
+    text-align: center;
+    padding-top: 10px;
 }
 
 #tilesContent .card {
-	width: 300px;
-	height: 300px;
-	/*float: left;*/
-	display: inline-block;
-	margin: 8px;
+    width: 300px;
+    height: 300px;
+    /*float: left;*/
+    display: inline-block;
+    margin: 8px;
+}
+
+#profileHeader {
+    height: 300px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(../images/hd.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
 }
 
 #tilesContent .card .card-content {
-	width: 100%;
-	height: 100%;
-	padding: 8px;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
 }
+
 #tilesContent .card .card-content .imgDiv {
-	width: 100%;
-	height: 90%;
-	background-position: 100% 100%;
-	background-size: cover;
-	background-repeat: no-repeat;
+    width: 100%;
+    height: 90%;
+    background-position: 100% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+
 .plusMinusIcon {
-	position: absolute;
-	top: 5px;
-	right: 8px;
-	width: 40px;
-	height: 40px;
-	/*background-color: red;*/
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    /*background-color: red;*/
 }
 
 .plusMinusIcon .btn {
-	background-color: white;
-	color: black !important;
+    background-color: white;
+    color: black !important;
 }
 
 .plusMinusIcon .btn i {
-	color: black;
+    color: black;
 }
 
 #tilesContent .tile {
-	transition: 0.2s;
+    transition: 0.2s;
 }
 
 #tilesContent .tile.activeTile {
-	transform: scale(0.85);
+    transform: scale(0.85);
 }
-/*#tilesContent .card-action{*/
-/*width: 100%;*/
-/*height: 20px;*/
-/*margin: 10px;*/
-/*}
-#modelbtn{
-margin-top: -35px;
-}*/
+
+#tilesContent .card-action {
+    width: 100%;
+    height: 20px;
+    margin: 0px;
+}
+
+#button,
+#button1,
+#button2 {
+    margin-top: -30px;
+    width: 100%;
+}
+
+#profileMainRow {
+    position: relative;
+    top: 200px;
+}
+
+#profileMainRow .card.profileImage {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 90px;
+    right: 10%;
+    /*left: calc(75% - 150px);*/
+}
+
+#profileMainRow .profileImage .card-content {
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    /*position: relative;*/
+    /*left: 10px;*/
+}
+
+.profileDetails {
+    width: 97%;
+    height: 100px;
+    position: relative;
+    left: 30px;
+    top: 100px;
+    /*margin-top: 30px;*/
+}
+
+#countryContainer .imgDiv,
+#stateContainer .imgDiv,
+#cityContainer .imgDiv {
+    background-size: cover;
+}
+
+#bottomContainer {
+    position: relative;
+    top: 140px;
+}
+
+#countryContainer .card-content.imgContent,
+#stateContainer .card-content.imgContent,
+#cityContainer .card-content.imgContent {
+    padding: 5px;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+#countryContainer .card,
+#stateContainer .card,
+#cityContainer .card {
+    width: 300px;
+    height: 300px;
+    /*float: left;*/
+    display: inline-block;
+    margin: 0;
+}
+
+.nav-wrapper {
+    /*padding-left: 5px;*/
+    background-color: #00897b;
+}
+
+#detail {
+    margin: 210px 0px 0px -10px;
+}
