@@ -3,6 +3,7 @@ html, body, form {
 	padding: 0;
 	height: 100%;
 	max-width: 2400px;
+	font-family: 'Segoe UI';
 }
 
 body {
