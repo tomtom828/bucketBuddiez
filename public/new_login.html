@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign up</title>
+    <link rel="stylesheet" href="assets/css/materialize/materialize.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<!-- <div id="profileHeader" class="card"> -->
+<nav>
+    <div class="nav-wrapper">
+        <a href="../profile.html" class="brand-logo">Bucket Buddiez</a>
+    </div>
+</nav>
+
+<body>
+    <form name="myForm" action="user/signup" onsubmit="return validateForm()" method="post">
+        <!-- <div class="row"> -->
+        <div class="container" ;>
+            <h3>Log in </h3>
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s6">
+                        Email:
+                        <input id="email" type="email" class="validate" required>
+                        <label for="email"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    Password:
+                    <input id="password" type="password" class="validate" required>
+                    <label for="password"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                </div>
+                <input class="btn" type="submit" value="Log in">
+            </div>
+        </div>
+    </form>
+</body>
+</body>
+
+</html>
