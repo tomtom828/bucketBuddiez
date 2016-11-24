@@ -9,7 +9,7 @@ function signInUser(req, res, error, user, info){
   if(error) { return res.status(500).json(error); }
   if(!user) { return res.status(401).json(info.message); }
   var userId = user.id;
-  res.redirect('/index');
+  res.redirect('/view/bucketlist/' + user.id);
 }
 
 // GET Routes to render pages
@@ -46,13 +46,6 @@ domRouter.post('/user/login', function(req, res, next) {
 });
 
 
-// domRouter.get('/logout', function(req, res){
-//   if(req.isAuthenticated()){
-//     req.logout();
-//     req.session.messages = req.i18n.__("Log out successfully");
-//   }
-//     res.redirect('/');
-// })
 
 domRouter.post('/user/signup', function(req, res, next){
   console.log(req.body.username, req.body.password);
@@ -79,7 +72,7 @@ domRouter.get('/login/facebook/callback',
 
 // User Sees All Bucket List entries in the Database (DOM Render)
 domRouter.get('/view/bucketlist/:userId',
-  require("connect-ensure-login").ensureLoggedIn(),
+  // require("connect-ensure-login").ensureLoggedIn(),
   function(req, res){
 
   // Query Database for all the user's liked countries (associated via the "___likes" tables)
