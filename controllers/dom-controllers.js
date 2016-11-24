@@ -94,9 +94,9 @@ domRouter.get('/view/bucketlist/:userId',
     // Pass the returned data into a Handlebars object
     var hbsObject = { bucketlist: data };
 
-    // Render *addPlaces* template with *states*
-    //res.render('viewAccount', hbsObject);
-    res.json(hbsObject);
+    // Render porfolio page
+    res.render('viewAccount', hbsObject);
+    // res.json(hbsObject)
 
   });
 
@@ -313,32 +313,6 @@ domRouter.get('/view/cities/:userId', function (req, res){
 });
 
 
-<<<<<<< HEAD
-=======
-// User Sees All Bucket List entries in the Database (DOM Render)
-domRouter.get('/view/bucketlist/:userId', function(req, res){
-
-  // Query Database for all the user's liked countries (associated via the "___likes" tables)
-  models.Users.findAll({
-    where: {
-      id: req.params.userId // OR req.body.userId for FORM ACTION
-    },
-    include: [models.Countries, models.States, models.Cities],
-    // order: [[models.Countries.countryName, 'ASC'],[models.States.stateName, 'ASC'],[models.Cities.cityName, 'ASC']]
-  }).then(function(data){
-
-    // Pass the returned data into a Handlebars object
-    var hbsObject = { bucketlist: data };
-
-    // Render porfolio page
-    res.render('viewAccount', hbsObject);
-    // res.json(hbsObject)
-
-  });
-
-});
-
->>>>>>> master
 // ----------------------------------------------------
 
 
