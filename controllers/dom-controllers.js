@@ -39,15 +39,15 @@ function isUser(req, res, next){
 domRouter.get('/', function (req, res){
   // res.sendFile(path.join(__dirname, '/../public/index.html'));
   console.log(req.user);
-  res.render('addCities')
+  res.render('index');
 });
-
 
 // Login Page (DOM Render)
 domRouter.get('/login', function (req, res){
 
   // Render sign up page (no handlebars)
-  res.sendFile(path.join(__dirname, '/../public/login.html'));
+  // res.sendFile(path.join(__dirname, '/../public/login.html'));
+  res.render('login');
 
 });
 
@@ -112,7 +112,8 @@ domRouter.get('/view/bucketlist/:userId', requireAuth, isUser,
 domRouter.get('/signup', function (req, res){
 
   // Render sign up page (no handlebars)
-  res.sendFile(path.join(__dirname, '/../public/signup.html'));
+  // res.sendFile(path.join(__dirname, '/../public/signup.html'));
+  res.render('signup');
 
 });
 

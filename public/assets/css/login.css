@@ -1,0 +1,23 @@
+.container {
+  height: 500px;
+  width: 350px;
+  background: #cce6ff;
+  float: center;
+  padding: 40px;
+  margin-top:40px;
+  opacity: 0.9;
+  border-color: transparent;
+
+}
+
+body{
+  /*background-image: url(../images/dest1.jpg);*/
+  background-image: url(http://www.policestateusa.com/wp-content/uploads/2013/12/TSAKids1.png);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+nav{
+  background: transparent;
+}
