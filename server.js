@@ -20,8 +20,23 @@ app.use(express.static(process.cwd() + '/public'));
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
+app.use(cookieParser('mysecret')); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: true})); // get information from html forms
+app.use(session({
+  secret: 'mysecret',
+  name: 'mysession',
+  saveUninitialized: true,
+  resave: false
+}));
+// required for passport
+app.use(passport.initialize());
+app.use(passport.session({
+  secret: 'mysecret',
+  name: 'mysession',
+  saveUninitialized: true,
+  resave: false
+})); // persistent login sessions
+require('./config/passport')(app);
 
 // Handlebars
 var exphbs = require('express-handlebars');
@@ -31,12 +46,6 @@ app.set('view engine', 'handlebars');
 
 // Sync models
 models.sequelize.sync();
-
-// required for passport
-require('./config/passport')(app);
-app.use(session({ secret: 'mysecret' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
 
 
 // Import DOM controller
