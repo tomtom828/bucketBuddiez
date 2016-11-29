@@ -171,8 +171,8 @@ domRouter.get('/view/countries/:userId', function (req, res){
           };
 
           // Render *addPlaces* template with *countries*
-          //res.render('addCountries', hbsObject);
-res.json(hbsObject)
+          res.render('addCountries', hbsObject);
+
       });
 
     });
@@ -234,7 +234,10 @@ domRouter.get('/view/states/:userId', function (req, res){
         }).then(function(data){
 
           // Pass the returned data into a Handlebars object
-          var hbsObject = { states: data };
+          var hbsObject = { 
+            user: req.params.userId,
+            states: data 
+          };
 
           // Render *addPlaces* template with *countries*
           res.render('addStates', hbsObject);
@@ -300,7 +303,10 @@ domRouter.get('/view/cities/:userId', function (req, res){
         }).then(function(data){
 
           // Pass the returned data into a Handlebars object
-          var hbsObject = { cities: data };
+          var hbsObject = { 
+            user: req.params.userId,
+            cities: data 
+          };
 
           // Render *addPlaces* template with *countries*
           res.render('addCities', hbsObject);
