@@ -26,7 +26,10 @@ domRouter.get('/index', function (req, res){
 
   // Render hompage (no handlebars)
   // res.sendFile(path.join(__dirname, '/../public/index.html'));
-  res.render('index');
+  conditions = {
+    footerStatus: false
+  }
+  res.render('index', {data: conditions});
 });
 
 
@@ -162,11 +165,14 @@ domRouter.get('/view/countries/:userId', function (req, res){
         }).then(function(data){
 
           // Pass the returned data into a Handlebars object
-          var hbsObject = { countries: data };
+          var hbsObject = { 
+            user: req.params.userId,
+            countries: data 
+          };
 
           // Render *addPlaces* template with *countries*
-          res.render('addCountries', hbsObject);
-
+          //res.render('addCountries', hbsObject);
+res.json(hbsObject)
       });
 
     });

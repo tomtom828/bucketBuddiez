@@ -1,4 +1,4 @@
-.container {
+#mainlogin {
   height: 500px;
   width: 350px;
   background: #cce6ff;
@@ -10,7 +10,7 @@
 
 }
 
-body{
+#log{
   /*background-image: url(../images/dest1.jpg);*/
   background-image: url(http://www.policestateusa.com/wp-content/uploads/2013/12/TSAKids1.png);
     background-size: cover;
@@ -18,6 +18,6 @@ body{
     background-position: center center;
 }
 
-nav{
+#navlog{
   background: transparent;
 }

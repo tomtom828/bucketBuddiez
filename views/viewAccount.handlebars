@@ -5,9 +5,11 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Your Bucket list</a>
             <ul id="nav-mobile" class="right ">
-                <li><a href="/view/states/:userId">Add States</a></li>
-                <li><a href="/view/cities/:userId">Add Cities</a></li>
-                <li><a href="/view/bucketlist/:userId">View Profile</a></li>
+            {{#each bucketlist}}
+                <li><a href="/view/states/{{this.id}}">Add States</a></li>
+                <li><a href="/view/cities/{{this.id}}">Add Cities</a></li>
+                <li><a href="/view/bucketlist/{{this.id}}">View Profile</a></li>
+            {{/each}}
             </ul>
         </div>
     </nav>

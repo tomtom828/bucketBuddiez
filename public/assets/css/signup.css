@@ -1,4 +1,4 @@
-.container {
+#mainsignup{
   height: 550px;
   width: 400px;
   background: #cce6ff;
@@ -10,7 +10,7 @@
 
 }
 
-body{
+#sup{
   /*background-image: url(../images/dest1.jpg);*/
   background-image: url(http://bestanimations.com/Transport/Aircraft/plane-travel-animated-gif-4.gif);
     background-size: cover;
@@ -18,6 +18,6 @@ body{
     background-position: center center;
 }
 
-nav{
+#navsign{
   background: transparent;
 }
