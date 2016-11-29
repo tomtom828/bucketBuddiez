@@ -25,8 +25,8 @@ domRouter.get('/', function (req, res){
 domRouter.get('/index', function (req, res){
 
   // Render hompage (no handlebars)
-  res.sendFile(path.join(__dirname, '/../public/index.html'));
-
+  // res.sendFile(path.join(__dirname, '/../public/index.html'));
+  res.render('index');
 });
 
 
@@ -35,7 +35,8 @@ domRouter.get('/index', function (req, res){
 domRouter.get('/login', function (req, res){
 
   // Render sign up page (no handlebars)
-  res.sendFile(path.join(__dirname, '/../public/login.html'));
+  // res.sendFile(path.join(__dirname, '/../public/login.html'));
+  res.render('login');
 
 });
 
@@ -104,7 +105,8 @@ domRouter.get('/view/bucketlist/:userId',
 domRouter.get('/signup', function (req, res){
 
   // Render sign up page (no handlebars)
-  res.sendFile(path.join(__dirname, '/../public/signup.html'));
+  // res.sendFile(path.join(__dirname, '/../public/signup.html'));
+  res.render('signup');
 
 });
 
