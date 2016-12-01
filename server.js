@@ -1,5 +1,5 @@
 // set up ======================================================================
-// get all the tools we need
+// get all the dependencies we need
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 3000;
@@ -24,18 +24,12 @@ app.use(cookieParser('mysecret')); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: true})); // get information from html forms
 app.use(session({
   secret: 'mysecret',
-  name: 'mysession',
   saveUninitialized: true,
-  resave: false
+  resave: true
 }));
 // required for passport
 app.use(passport.initialize());
-app.use(passport.session({
-  secret: 'mysecret',
-  name: 'mysession',
-  saveUninitialized: true,
-  resave: false
-})); // persistent login sessions
+app.use(passport.session()); // persistent login sessions
 require('./config/passport')(app);
 
 // Handlebars
@@ -47,6 +41,11 @@ app.set('view engine', 'handlebars');
 // Sync models
 models.sequelize.sync();
 
+// Global user var
+app.use(function (req, res, next){
+  res.locals.user = req.user || null;
+  next();
+})
 
 // Import DOM controller
 var domRouter = require('./controllers/dom-controllers.js');

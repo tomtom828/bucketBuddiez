@@ -8,8 +8,10 @@ var passport = require("passport");
 function signInUser(req, res, error, user, info){
   if(error) { return res.status(500).json(error); }
   if(!user) { return res.status(401).json(info.message); }
+  console.log(user);
   var userId = user.id;
-  res.redirect('/');
+  console.log(userId);
+  res.redirect('/view/bucketlist/' + userId);
 }
 
 function requireAuth(req, res, next){
@@ -23,9 +25,9 @@ function requireAuth(req, res, next){
 }
 
 function isUser(req, res, next){
-
+  console.log('also hit');
   // check if the user is logged in
-  if(!req.isAuthenticated()){
+  if(!req.user){
     req.session.messages = "You need to login to view this page";
     res.redirect('/login');
   }
@@ -38,7 +40,7 @@ function isUser(req, res, next){
 // Index Redirect
 domRouter.get('/', function (req, res){
   // res.sendFile(path.join(__dirname, '/../public/index.html'));
-  console.log(req.user);
+  // console.log(req.user);
   res.render('index');
 });
 
@@ -68,23 +70,25 @@ domRouter.post('/user/signup', function(req, res, next){
 
 domRouter.get('/user/logout', function(req, res) {
   req.session.destroy();
-  res.redirect('/index');
+  res.redirect('/');
 });
 
 // Facebook
-domRouter.get('/login/facebook', passport.authenticate('facebook'));
+// domRouter.get('/login/facebook', passport.authenticate('facebook'));
 
-domRouter.get('/login/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/login' }),
+// domRouter.get('/login/facebook/callback',
+//   passport.authenticate('facebook', {failureRedirect: '/login' }),
 
-  function(req, res) {
-    res.redirect("/view/bucketlist/2");
-});
+//   function(req, res) {
+//     res.redirect("/view/bucketlist/2");
+// });
 
 
 // User Sees All Bucket List entries in the Database (DOM Render)
-domRouter.get('/view/bucketlist/:userId', requireAuth, isUser,
+domRouter.get('/view/bucketlist/:userId', 
   function(req, res){
+
+
 
   // Query Database for all the user's liked countries (associated via the "___likes" tables)
   models.Users.findAll({
