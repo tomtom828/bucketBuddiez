@@ -8,8 +8,30 @@ var passport = require("passport");
 function signInUser(req, res, error, user, info){
   if(error) { return res.status(500).json(error); }
   if(!user) { return res.status(401).json(info.message); }
+  console.log(user);
   var userId = user.id;
-  res.redirect('/view/bucketlist/' + user.id);
+  console.log(userId);
+  res.redirect('/view/bucketlist/' + userId);
+}
+
+function requireAuth(req, res, next){
+  console.log('hit');
+  // check if the user is logged in
+  if(!req.isAuthenticated()){
+    req.session.messages = "You need to login to view this page";
+    res.redirect('/login');
+  }
+  next();
+}
+
+function isUser(req, res, next){
+  console.log('also hit');
+  // check if the user is logged in
+  if(!req.user){
+    req.session.messages = "You need to login to view this page";
+    res.redirect('/login');
+  }
+  next();
 }
 
 // GET Routes to render pages
@@ -17,22 +39,21 @@ function signInUser(req, res, error, user, info){
 
 // Index Redirect
 domRouter.get('/', function (req, res){
-  res.redirect('/index');
-});
-
-
-// Index Page (DOM Render)
-domRouter.get('/index', function (req, res){
-
-  // Render hompage (no handlebars)
   // res.sendFile(path.join(__dirname, '/../public/index.html'));
-  conditions = {
-    footerStatus: false
-  }
-  res.render('index', {data: conditions});
+
+
+
+  // conditions = {
+  //   footerStatus: false
+  // }
+  // res.render('index', {data: conditions});
+
+
+
+  // console.log(req.user);
+  res.render('index');
+
 });
-
-
 
 // Login Page (DOM Render)
 domRouter.get('/login', function (req, res){
@@ -60,24 +81,25 @@ domRouter.post('/user/signup', function(req, res, next){
 
 domRouter.get('/user/logout', function(req, res) {
   req.session.destroy();
-  res.redirect('/index');
+  res.redirect('/');
 });
 
 // Facebook
-domRouter.get('/login/facebook', passport.authenticate('facebook'));
+// domRouter.get('/login/facebook', passport.authenticate('facebook'));
 
-domRouter.get('/login/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/login' }),
+// domRouter.get('/login/facebook/callback',
+//   passport.authenticate('facebook', {failureRedirect: '/login' }),
 
-  function(req, res) {
-    res.redirect("/view/bucketlist/2");
-});
+//   function(req, res) {
+//     res.redirect("/view/bucketlist/2");
+// });
 
 
 // User Sees All Bucket List entries in the Database (DOM Render)
-domRouter.get('/view/bucketlist/:userId',
-  // require("connect-ensure-login").ensureLoggedIn(),
+domRouter.get('/view/bucketlist/:userId', 
   function(req, res){
+
+
 
   // Query Database for all the user's liked countries (associated via the "___likes" tables)
   models.Users.findAll({
@@ -98,9 +120,6 @@ domRouter.get('/view/bucketlist/:userId',
   });
 
 });
-
-
-
 
 
 

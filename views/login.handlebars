@@ -6,7 +6,7 @@
     </div>
 </nav>
 
-    <form name="myForm" action="user/signup" onsubmit="return validateForm()" method="post">
+    <form name="myForm" action="user/login" onsubmit="return validateForm()" method="post">
         <!-- <div class="row"> -->
         <div class="container" id="mainlogin">
             <h3>Log in </h3>
@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="input-field col s6">
                         Email:
-                        <input id="email" type="email" class="validate" required>
+                        <input id="username" type="text" class="validate" name="email" required>
                         <label for="email"></label>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     Password:
-                    <input id="password" type="password" class="validate" required>
+                    <input id="password" type="password" class="validate" name="password" required>
                     <label for="password"></label>
                 </div>
             </div>
