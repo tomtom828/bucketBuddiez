@@ -1,5 +1,5 @@
 // set up ======================================================================
-// get all the tools we need
+// get all the dependencies we need
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 3000;
@@ -47,6 +47,11 @@ app.set('view engine', 'handlebars');
 // Sync models
 models.sequelize.sync();
 
+// Global user var
+app.use(function (req, res, next){
+  res.locals.user = req.user || null;
+  next();
+})
 
 // Import DOM controller
 var domRouter = require('./controllers/dom-controllers.js');

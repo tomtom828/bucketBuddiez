@@ -48,9 +48,14 @@ module.exports = function(app){
     },
     function(req, username, password, done){
       models.Users.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: username,
         password: password
       }).then(function(user) {
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.save();
         return done(null, user);
       }).catch(function() {
         return done(null, false);
