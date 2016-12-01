@@ -6,9 +6,10 @@
             <a href="#" class="brand-logo">Your Bucket list</a>
             <ul id="nav-mobile" class="right ">
             {{#each bucketlist}}
+                <li><a href="/view/countries/{{this.id}}">Add Countries</a></li>
                 <li><a href="/view/states/{{this.id}}">Add States</a></li>
                 <li><a href="/view/cities/{{this.id}}">Add Cities</a></li>
-                <li><a href="/view/bucketlist/{{this.id}}">View Profile</a></li>
+                <li><a href="#">Log Out</a>
             {{/each}}
             </ul>
         </div>
