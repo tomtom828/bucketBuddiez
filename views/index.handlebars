@@ -17,12 +17,17 @@
           </li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
-          <li><a href="#">LOG IN</a></li>
-          <li><a href="signup.html">SIGN UP</a></li>
-          <form action="user/logout" method="get">
-          <input type="hidden">
-          <button type="submit">Logout</button>
-          </form>
+          {{#if user}}
+            <li>
+              <form action="user/logout" method="get">
+              <input type="hidden">
+              <button type="submit">LOGOUT</button>
+              </form>
+            </li>
+          {{else}}
+            <li><a href="#">LOG IN</a></li>
+            <li><a href="signup.html">SIGN UP</a></li>
+          {{/if}}
         </ul>
       </div>
     </nav>

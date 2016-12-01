@@ -8,6 +8,7 @@ var passport = require("passport");
 function signInUser(req, res, error, user, info){
   if(error) { return res.status(500).json(error); }
   if(!user) { return res.status(401).json(info.message); }
+  console.log(user);
   var userId = user.id;
   console.log(userId);
   res.redirect('/view/bucketlist/' + userId);
@@ -87,7 +88,7 @@ domRouter.get('/user/logout', function(req, res) {
 domRouter.get('/view/bucketlist/:userId', 
   function(req, res){
 
-      
+
 
   // Query Database for all the user's liked countries (associated via the "___likes" tables)
   models.Users.findAll({

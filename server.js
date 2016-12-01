@@ -24,18 +24,12 @@ app.use(cookieParser('mysecret')); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: true})); // get information from html forms
 app.use(session({
   secret: 'mysecret',
-  name: 'mysession',
   saveUninitialized: true,
-  resave: false
+  resave: true
 }));
 // required for passport
 app.use(passport.initialize());
-app.use(passport.session({
-  secret: 'mysecret',
-  name: 'mysession',
-  saveUninitialized: true,
-  resave: false
-})); // persistent login sessions
+app.use(passport.session()); // persistent login sessions
 require('./config/passport')(app);
 
 // Handlebars
