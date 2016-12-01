@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=production && node server.js",
-    "setupDB": "sequelize db:migrate && sequelize db:seed:all && node db/seed-user-likes.js"
+    "setupDB": "sequelize db:migrate && sequelize db:seed:all && node db/seed-user-likes.js",
+    "heroku-postbuild": "sequelize db:migrate && sequelize db:seed:all && node db/seed-user-likes.js"
   },
   "engines": {
     "node": "4.1.1"
