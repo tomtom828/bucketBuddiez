@@ -26,10 +26,10 @@ domRouter.get('/index', function (req, res){
 
   // Render hompage (no handlebars)
   // res.sendFile(path.join(__dirname, '/../public/index.html'));
-  conditions = {
-    footerStatus: false
-  }
-  res.render('index', {data: conditions});
+  // conditions = {
+  //   footerStatus: true
+  // }
+  res.render('index');
 });
 
 
@@ -40,6 +40,7 @@ domRouter.get('/login', function (req, res){
   // Render sign up page (no handlebars)
   // res.sendFile(path.join(__dirname, '/../public/login.html'));
   res.render('login');
+  // res.render('login');
 
 });
 
@@ -110,6 +111,7 @@ domRouter.get('/signup', function (req, res){
   // Render sign up page (no handlebars)
   // res.sendFile(path.join(__dirname, '/../public/signup.html'));
   res.render('signup');
+  // res.render('signup');
 
 });
 
