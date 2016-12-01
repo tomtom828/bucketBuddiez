@@ -13,7 +13,7 @@ nav {
 	z-index: 10;
 }
 
-.nav-wrapper {
+.index-nav-wrapper {
 	padding-left: 5px;
 	background-color: transparent;
 }
@@ -46,7 +46,7 @@ nav {
 #imagesRow {
 	margin-top: 40px;;
 	position: relative;
-	top: -100px;
+	top: -146px;
 }
 
 #destinationRow {

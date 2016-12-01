@@ -40,8 +40,17 @@ function isUser(req, res, next){
 // Index Redirect
 domRouter.get('/', function (req, res){
   // res.sendFile(path.join(__dirname, '/../public/index.html'));
+
+
+  // conditions = {
+  //   footerStatus: false
+  // }
+  // res.render('index', {data: conditions});
+
+
   // console.log(req.user);
   res.render('index');
+
 });
 
 // Login Page (DOM Render)
@@ -50,6 +59,7 @@ domRouter.get('/login', function (req, res){
   // Render sign up page (no handlebars)
   // res.sendFile(path.join(__dirname, '/../public/login.html'));
   res.render('login');
+  // res.render('login');
 
 });
 
@@ -118,6 +128,7 @@ domRouter.get('/signup', function (req, res){
   // Render sign up page (no handlebars)
   // res.sendFile(path.join(__dirname, '/../public/signup.html'));
   res.render('signup');
+  // res.render('signup');
 
 });
 
@@ -173,7 +184,10 @@ domRouter.get('/view/countries/:userId', function (req, res){
         }).then(function(data){
 
           // Pass the returned data into a Handlebars object
-          var hbsObject = { countries: data };
+          var hbsObject = { 
+            user: req.params.userId,
+            countries: data 
+          };
 
           // Render *addPlaces* template with *countries*
           res.render('addCountries', hbsObject);
@@ -239,7 +253,10 @@ domRouter.get('/view/states/:userId', function (req, res){
         }).then(function(data){
 
           // Pass the returned data into a Handlebars object
-          var hbsObject = { states: data };
+          var hbsObject = { 
+            user: req.params.userId,
+            states: data 
+          };
 
           // Render *addPlaces* template with *countries*
           res.render('addStates', hbsObject);
@@ -305,7 +322,10 @@ domRouter.get('/view/cities/:userId', function (req, res){
         }).then(function(data){
 
           // Pass the returned data into a Handlebars object
-          var hbsObject = { cities: data };
+          var hbsObject = { 
+            user: req.params.userId,
+            cities: data 
+          };
 
           // Render *addPlaces* template with *countries*
           res.render('addCities', hbsObject);

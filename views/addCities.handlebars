@@ -1,12 +1,12 @@
 <!-- This is the page that the user can use to add cities to their bucket list -->
 <!-- Page Title -->
 <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper click-to-toggle">
         <a href="#" class="brand-logo">City Teleporter</a>
         <ul id="nav-mobile" class="right ">
-            <li><a href="/view/countries/:userId">Add Countries</a></li>
-            <li><a href="/view/states/:userId">Add States</a></li>
-            <li><a href="/view/bucketlist/:userId">View Profile</a></li>
+            <li><a href="/view/countries/{{this.user}}">Add Countries</a></li>
+            <li><a href="/view/states/{{this.user}}">Add States</a></li>
+            <li><a href="/view/bucketlist/{{this.user}}">View Profile</a></li>
         </ul>
     </div>
 </nav>
