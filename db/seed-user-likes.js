@@ -24,7 +24,7 @@ sequelizeConnection.sync()
       id: 1
     }
   }).then(function(user){
-    user.addCountry([10, 9, 3, 7, 1]);
+    user.addCountry([10, 9, 12, 7, 1]);
   });
 
 
@@ -35,6 +35,26 @@ sequelizeConnection.sync()
     }
   }).then(function(user){
     user.addCountry([10, 9, 2, 8, 1]);
+  });
+
+
+  // User 3
+  models.Users.findOne({
+    where: {
+      id: 3
+    }
+  }).then(function(user){
+    user.addCountry([1, 2, 3, 4, 5]);
+  });
+
+
+  // User 4
+  models.Users.findOne({
+    where: {
+      id: 4
+    }
+  }).then(function(user){
+    user.addCountry([6, 7, 8, 4, 1]);
   });
 
 
@@ -61,6 +81,26 @@ sequelizeConnection.sync()
   });
 
 
+  // User 3
+  models.Users.findOne({
+    where: {
+      id: 3
+    }
+  }).then(function(user){
+    user.addState([1, 2, 3, 4, 5]);
+  });
+
+
+  // User 4
+  models.Users.findOne({
+    where: {
+      id: 4
+    }
+  }).then(function(user){
+    user.addState([6, 7, 8, 4, 1]);
+  });
+
+
 
   // ------------ Seed the city-likes ------------
 
@@ -82,5 +122,26 @@ sequelizeConnection.sync()
   }).then(function(user){
     user.addCity([10, 9, 2, 8, 1]);
   });
+
+
+  // User 3
+  models.Users.findOne({
+    where: {
+      id: 3
+    }
+  }).then(function(user){
+    user.addCity([1, 2, 3, 4, 5]);
+  });
+
+
+  // User 4
+  models.Users.findOne({
+    where: {
+      id: 4
+    }
+  }).then(function(user){
+    user.addCity([6, 7, 8, 4, 1]);
+  });
+
 
 })
