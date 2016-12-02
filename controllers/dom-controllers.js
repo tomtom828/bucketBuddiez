@@ -1,4 +1,6 @@
 // Node Dependencies
+var SessionUser = "HACKY FIX";
+
 var express = require('express');
 var domRouter = express.Router();
 var models = require('../models'); // Pulls out the Models
@@ -8,30 +10,32 @@ var passport = require("passport");
 function signInUser(req, res, error, user, info){
   if(error) { return res.status(500).json(error); }
   if(!user) { return res.status(401).json(info.message); }
-  console.log(user);
-  var userId = user.id;
-  console.log(userId);
-  res.redirect('/view/bucketlist/' + userId);
+  //console.log(user);
+  SessionUser = user
+  //console.log(userId);
+  res.redirect('/view/bucketlist/' + 5);
 }
 
-function requireAuth(req, res, next){
-  console.log('hit');
-  // check if the user is logged in
-  if(!req.isAuthenticated()){
-    req.session.messages = "You need to login to view this page";
-    res.redirect('/login');
-  }
-  next();
-}
+// function requireAuth(req, res, next){
+//   console.log('hit');
+//   // check if the user is logged in
+//   if(!req.isAuthenticated()){
+//     req.session.messages = "You need to login to view this page";
+//     res.redirect('/login');
+//   }
+//   next();
+// }
 
 function isUser(req, res, next){
   console.log('also hit');
   // check if the user is logged in
-  if(!req.user){
+  if(SessionUser == "HACKY FIX"){
     req.session.messages = "You need to login to view this page";
     res.redirect('/login');
   }
-  next();
+  else{
+    next();
+  }
 }
 
 // GET Routes to render pages
@@ -95,11 +99,11 @@ domRouter.get('/user/logout', function(req, res) {
 
 
 // User Sees All Bucket List entries in the Database (DOM Render)
-domRouter.get('/view/bucketlist/:userId', 
+domRouter.get('/view/bucketlist/:userId', isUser,
   function(req, res){
-
-
-
+console.log('jelloooooo111111')
+console.log(SessionUser)
+console.log('-----------')
   // Query Database for all the user's liked countries (associated via the "___likes" tables)
   models.Users.findAll({
     where: {
