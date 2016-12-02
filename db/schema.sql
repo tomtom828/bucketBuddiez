@@ -10,7 +10,7 @@ CREATE DATABASE bucketBuddiezDB;
 ` node db/seed-user-likes.js `
 
 -- NOTE: If you completed the readme, both of these steps were done when you ran...
-npm run-script setupDB
+npm run setupDB
 
 
 
