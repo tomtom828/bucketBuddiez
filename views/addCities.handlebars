@@ -4,14 +4,14 @@
     <div class="nav-wrapper click-to-toggle">
         <a href="#" class="brand-logo">City Teleporter</a>
         <ul id="nav-mobile" class="right ">
-            <li><a href="/view/countries/{{this.user}}">Add Countries</a></li>
-            <li><a href="/view/states/{{this.user}}">Add States</a></li>
-            <li><a href="/view/bucketlist/{{this.user}}">View Profile</a></li>
+            <li><a href="/view/countries">Add Countries</a></li>
+            <li><a href="/view/states">Add States</a></li>
+            <li><a href="/view/bucketlist">View Profile</a></li>
         </ul>
     </div>
 </nav>
 <!-- Dynamically Render Country Tiles -->
-<main id="tilesContent">
+<main id="tilesContent" data-userid="{{this.user}}">
     {{#each cities}}
     <div class="tile card white">
         <div class="card-content black-text">

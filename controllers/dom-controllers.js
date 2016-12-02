@@ -5,70 +5,71 @@ var models = require('../models'); // Pulls out the Models
 var path = require('path');
 var passport = require("passport");
 
+
+
+// PASSPORT JS SESSION FUNCTIONS
+// ----------------------------------------------------
+
+// Global Variable to Store User Session (Express would not keep it persistent)
+var USER_SESSION = null;
+
+// Sign in User
 function signInUser(req, res, error, user, info){
   if(error) { return res.status(500).json(error); }
   if(!user) { return res.status(401).json(info.message); }
-  console.log(user);
-  var userId = user.id;
-  console.log(userId);
-  res.redirect('/view/bucketlist/' + userId);
+
+  // Set the session to global variable
+  USER_SESSION = user;
+  console.log(USER_SESSION);
+
+  // Render Bucklist
+  res.redirect('/view/bucketlist');
 }
 
-function requireAuth(req, res, next){
-  console.log('hit');
-  // check if the user is logged in
-  if(!req.isAuthenticated()){
-    req.session.messages = "You need to login to view this page";
-    res.redirect('/login');
-  }
-  next();
-}
-
+// Require User Session (to protect the routes)
 function isUser(req, res, next){
-  console.log('also hit');
-  // check if the user is logged in
-  if(!req.user){
+  // check if the user is logged in (using our Global variable work around)
+  if(USER_SESSION == null){
     req.session.messages = "You need to login to view this page";
     res.redirect('/login');
   }
-  next();
+  else{
+    next();
+  }
+  
 }
 
-// GET Routes to render pages
+
+
+// PUBLIC ROUTES (No User Auth Needed)
 // ----------------------------------------------------
 
-// Index Redirect
+// Index Home Page Render
 domRouter.get('/', function (req, res){
-  // res.sendFile(path.join(__dirname, '/../public/index.html'));
-
-
-  // conditions = {
-  //   footerStatus: false
-  // }
-  // res.render('index', {data: conditions});
-
-
-  // console.log(req.user);
   res.render('index');
-
 });
+
+
+// Sign up Page (DOM Render)
+domRouter.get('/signup', function (req, res){
+  res.render('signup');
+});
+
 
 // Login Page (DOM Render)
 domRouter.get('/login', function (req, res){
-
-  // Render sign up page (no handlebars)
-  // res.sendFile(path.join(__dirname, '/../public/login.html'));
   res.render('login');
-  // res.render('login');
-
 });
 
+
+
+// LOGIN, LOGOUT, & SIGN-UP ROUTES
+// ----------------------------------------------------
 domRouter.post('/user/login', function(req, res, next) {
   passport.authenticate('local', function(error, user, info) {
     signInUser(req, res, error, user, info);
   })(req, res, next);
 });
-
 
 
 domRouter.post('/user/signup', function(req, res, next){
@@ -80,30 +81,26 @@ domRouter.post('/user/signup', function(req, res, next){
 
 domRouter.get('/user/logout', function(req, res) {
   req.session.destroy();
+
+  // Remove the session to global variable
+  USER_SESSION = null;
+
+  // Redirect to Homepage
   res.redirect('/');
 });
 
-// Facebook
-// domRouter.get('/login/facebook', passport.authenticate('facebook'));
-
-// domRouter.get('/login/facebook/callback',
-//   passport.authenticate('facebook', {failureRedirect: '/login' }),
-
-//   function(req, res) {
-//     res.redirect("/view/bucketlist/2");
-// });
 
 
+
+// SECURE ROUTES (Require a Login Session)
+// ----------------------------------------------------
 // User Sees All Bucket List entries in the Database (DOM Render)
-domRouter.get('/view/bucketlist/:userId', 
-  function(req, res){
-
-
+domRouter.get('/view/bucketlist', isUser, function(req, res){
 
   // Query Database for all the user's liked countries (associated via the "___likes" tables)
   models.Users.findAll({
     where: {
-      id: req.params.userId // OR req.body.userId for FORM ACTION
+      id: USER_SESSION.id // Pulled from our global session variable
     },
     include: [models.Countries, models.States, models.Cities],
     // order: [[models.Countries.countryName, 'ASC'],[models.States.stateName, 'ASC'],[models.Cities.cityName, 'ASC']]
@@ -114,32 +111,20 @@ domRouter.get('/view/bucketlist/:userId',
 
     // Render porfolio page
     res.render('viewAccount', hbsObject);
-    // res.json(hbsObject)
 
   });
 
 });
 
 
-
-// Sign up Page (DOM Render)
-domRouter.get('/signup', function (req, res){
-
-  // Render sign up page (no handlebars)
-  // res.sendFile(path.join(__dirname, '/../public/signup.html'));
-  res.render('signup');
-  // res.render('signup');
-
-});
-
 // User Sees All Countries in Database that they can add (DOM Render)
-domRouter.get('/view/countries/:userId', function (req, res){
+domRouter.get('/view/countries', isUser, function (req, res){
 
   // Find all Countries tied to the current user (so we can exclude them later)
   models.Countries.findAll({
     include: [{
       model: models.Users,
-      where: {id: req.params.userId}
+      where: {id: USER_SESSION.id} // Pulled from our global session variable
     }]
   }).then(function(excludeData){
 
@@ -185,13 +170,13 @@ domRouter.get('/view/countries/:userId', function (req, res){
 
           // Pass the returned data into a Handlebars object
           var hbsObject = { 
-            user: req.params.userId,
+            user: USER_SESSION.id, // Pulled from our global session variable,
             countries: data 
           };
 
           // Render *addPlaces* template with *countries*
           res.render('addCountries', hbsObject);
-
+          // res.json(hbsObject)
       });
 
     });
@@ -202,13 +187,13 @@ domRouter.get('/view/countries/:userId', function (req, res){
 
 
 // User Sees All States in Database (DOM Render)
-domRouter.get('/view/states/:userId', function (req, res){
+domRouter.get('/view/states', isUser, function (req, res){
 
   // Find all States tied to the current user (so we can exclude them later)
   models.States.findAll({
     include: [{
       model: models.Users,
-      where: {id: req.params.userId}
+      where: {id: USER_SESSION.id} // Pulled from our global session variable
     }]
   }).then(function(excludeData){
 
@@ -254,7 +239,7 @@ domRouter.get('/view/states/:userId', function (req, res){
 
           // Pass the returned data into a Handlebars object
           var hbsObject = { 
-            user: req.params.userId,
+            user: USER_SESSION.id, // Pulled from our global session variable
             states: data 
           };
 
@@ -271,7 +256,7 @@ domRouter.get('/view/states/:userId', function (req, res){
 
 
 // User Sees All Cities in Database (DOM Render)
-domRouter.get('/view/cities/:userId', function (req, res){
+domRouter.get('/view/cities', isUser, function (req, res){
 
   // Find all Cities tied to the current user (so we can exclude them later)
   models.Cities.findAll({
@@ -323,7 +308,7 @@ domRouter.get('/view/cities/:userId', function (req, res){
 
           // Pass the returned data into a Handlebars object
           var hbsObject = { 
-            user: req.params.userId,
+            user: USER_SESSION.id, // Pulled from our global session variable
             cities: data 
           };
 
