@@ -1,5 +1,5 @@
 // Node Dependencies
-var SessionUser = "HACKY FIX";
+var SessionUser = null;
 
 var express = require('express');
 var domRouter = express.Router();
@@ -29,7 +29,7 @@ function signInUser(req, res, error, user, info){
 function isUser(req, res, next){
   console.log('also hit');
   // check if the user is logged in
-  if(SessionUser == "HACKY FIX"){
+  if(SessionUser == null){
     req.session.messages = "You need to login to view this page";
     res.redirect('/login');
   }
@@ -84,6 +84,7 @@ domRouter.post('/user/signup', function(req, res, next){
 
 domRouter.get('/user/logout', function(req, res) {
   req.session.destroy();
+  SessionUser = null;
   res.redirect('/');
 });
 
