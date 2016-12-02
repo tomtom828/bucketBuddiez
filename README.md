@@ -73,14 +73,14 @@ If you wish to clone the app down to your local machine...
 
 ### Add to the bucketlist by clicking navbar links for each of the `Handlebars-js` rendered pages:
 
-##### Countries (`/view/countries` route)
+#### Countries (`/view/countries` route)
 ![countries](/screenshots/countries.png)
 ##### Clicking the (+) button triggers an `AJAX` call to the `/:action/country/:userId/:countryId` endpoint.
 
-##### States (`/view/states` route)
+#### States (`/view/states` route)
 ![states](/screenshots/states.png)
 ##### Clicking the (+) button triggers an `AJAX` call to the `/:action/state/:userId/:stateId` endpoint.
 
-##### Cities (`/view/cities` route)
+#### Cities (`/view/cities` route)
 ![states](/screenshots/cities.png)
 ##### Clicking the (+) button triggers an `AJAX` call to the `/:action/city/:userId/:cityId` endpoint.
