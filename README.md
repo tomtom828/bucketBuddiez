@@ -35,27 +35,31 @@ If you wish to clone the app down to your local machine...
 ## Screenshots
 
 ### Home Page (`/index` route)
-![hompepage](/screenshots/index.png)
 ##### Here, users can either signup for login to the app.
+![hompepage](/screenshots/index.png)
+
 
 
 ### Sign Up Page (`/signup` route)
-![sign up](/screenshots/signup.png)
 ##### Here, users will create an account with their name, email, and password
+![sign up](/screenshots/signup.png)
+
 
 
 ### Login Page (`/login` route)
-![login](/screenshots/login.png)
 ##### Here, users will login to their account with their email and password
+![login](/screenshots/login.png)
+
 
 
 ### Bucketlist Page (`/view/bucketlist` route)
-![bucketlist](/screenshots/bucklist.png)
 ##### After a sucessful login, the user is redirected to their bucketlist.
 ##### Using a session in `Passport-js` and `Handlebars-js` templating, this page is unique to each user.
 ##### If locations were added to the users accounts, they will be seen here. 
 ##### Clicking a (-) icon removes locations from the bucketlist using an `AJAX` call to our `API` endpoints.
 ##### From this page, the user can also Log Out of their account and end the session.
+![bucketlist](/screenshots/bucklist.png)
+
 
 
 ### Note that clicking "Find Travel Buddy" on the Bucketlist Page opens a `materialize` modal.
