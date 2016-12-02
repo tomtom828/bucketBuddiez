@@ -262,7 +262,7 @@ domRouter.get('/view/cities', isUser, function (req, res){
   models.Cities.findAll({
     include: [{
       model: models.Users,
-      where: {id: req.params.userId}
+      where: {id: USER_SESSION.id} // Pulled from our global session variable
     }]
   }).then(function(excludeData){
 

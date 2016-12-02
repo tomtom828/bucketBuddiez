@@ -28,7 +28,7 @@ $(document).on('click', '.buddyButton', function() {
     // Otherwise, Iterate through the JSON response and append all users
     else{
       $('#buddyTable').empty();
-      $('#buddyTable').append("<tr><td>Buddy Name</td><td>Buddy Email</td></tr>")
+      $('#buddyTable').append("<tr><td><b>Buddy Name</b></td><td><b>Buddy Email</b></td></tr>")
 
       for(var i=0; i < response[0].Users.length; i++){
 
