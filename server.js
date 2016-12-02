@@ -11,6 +11,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
+// initalize sequelize with session store 
+//var SequelizeStore = require('connect-session-sequelize')(session.Store);
+
 // Bring in the models
 var models = require('./models');
 

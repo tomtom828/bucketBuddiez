@@ -11,29 +11,41 @@ var passport = require("passport");
 // ----------------------------------------------------
 
 // Global Variable to Store User Session (Express would not keep it persistent)
-var USER_SESSION = null;
+// var USER_SESSION = null;
 
 // Sign in User
-function signInUser(req, res, error, user, info){
-  if(error) { res.redirect('/login'); } // return res.status(500).json(error);
-  if(!user) { res.redirect('/login');} // return res.status(401).json(info.message);
+// function signInUser(req, res, error, user, info){
+//   if(error) { res.redirect('/login'); } // return res.status(500).json(error);
+//   if(!user) { res.redirect('/login');} // return res.status(401).json(info.message);
 
-  // Set the session to global variable
-  USER_SESSION = user;
-  console.log(USER_SESSION);
+//   // Set the session to global variable
+//   // USER_SESSION = user;
+//   // console.log(USER_SESSION);
+
+// console.log(user)
+
+// req.logIn(user, function (err) {
+//   if (err) {
+//       return next(err);
+//   }
+//       // return res.redirect('/main/');
+//       res.redirect('/view/bucketlist');
+// });
 
   // Render Bucklist
-  res.redirect('/view/bucketlist');
-}
+ // res.redirect('/view/bucketlist');
+//}
 
 // Require User Session (to protect the routes)
 function isUser(req, res, next){
   // check if the user is logged in (using our Global variable work around)
-  if(USER_SESSION == null){
+  if(!req.user){
+    console.log('*******no user found************')
     req.session.messages = "You need to login to view this page";
     res.redirect('/login');
   }
   else{
+    console.log('*********miracle**********')
     next();
   }
   
@@ -66,8 +78,28 @@ domRouter.get('/login', function (req, res){
 // LOGIN, LOGOUT, & SIGN-UP ROUTES
 // ----------------------------------------------------
 domRouter.post('/user/login', function(req, res, next) {
-  passport.authenticate('local', function(error, user, info) {
-    signInUser(req, res, error, user, info);
+  // passport.authenticate('local', function(error, user, info) {
+  //   signInUser(req, res, error, user, info);
+  // })(req, res, next);
+  passport.authenticate('local', function (err, user, info) {
+      if (err) {
+          return next(err);
+      }
+      if (!user) {
+          return res.redirect('/login');
+      }
+          req.logIn(user, function (err) {
+              if (err) {
+                  return next(err);
+              }
+              // Manually save session before redirect. See bug https://github.com/expressjs/session/pull/69
+           // req.session.save(function(){
+                // res.redirect('/view/bucketlist');
+                console.log('----as-d---- saved seesion --------')
+                res.redirect('/view/bucketlist');
+           // });
+                  //return res.redirect('/view/bucketlist');
+          });
   })(req, res, next);
 });
 
@@ -83,7 +115,7 @@ domRouter.get('/user/logout', function(req, res) {
   req.session.destroy();
 
   // Remove the session to global variable
-  USER_SESSION = null;
+  // USER_SESSION = null;
 
   // Redirect to Homepage
   res.redirect('/');
@@ -96,11 +128,11 @@ domRouter.get('/user/logout', function(req, res) {
 // ----------------------------------------------------
 // User Sees All Bucket List entries in the Database (DOM Render)
 domRouter.get('/view/bucketlist', isUser, function(req, res){
-
+console.log('xxxxxxxxxxxxxxxx' + user.id)
   // Query Database for all the user's liked countries (associated via the "___likes" tables)
   models.Users.findAll({
     where: {
-      id: USER_SESSION.id // Pulled from our global session variable
+      id: user.id // Pulled from our global session variable
     },
     include: [models.Countries, models.States, models.Cities],
     // order: [[models.Countries.countryName, 'ASC'],[models.States.stateName, 'ASC'],[models.Cities.cityName, 'ASC']]
