@@ -15,8 +15,8 @@ var USER_SESSION = null;
 
 // Sign in User
 function signInUser(req, res, error, user, info){
-  if(error) { return res.status(500).json(error); }
-  if(!user) { return res.status(401).json(info.message); }
+  if(error) { res.redirect('/login'); } // return res.status(500).json(error);
+  if(!user) { res.redirect('/login');} // return res.status(401).json(info.message);
 
   // Set the session to global variable
   USER_SESSION = user;
