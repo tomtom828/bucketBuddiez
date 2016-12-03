@@ -10,9 +10,12 @@ Please try out the deployed app in Heroku, found [here](https://bucket-buddiez.h
 
 #### Authors:
 [Tom Thompson](https://github.com/tomtom28/)
-[Avani Ghetia](https://github.com/avani19)
-[Mario Aburto](https://github.com/marioaburto10)
-[Masud Chowdhury](https://github.com/masudhchowdhury)
+
+[Avani Ghetia](https://github.com/avani19/)
+
+[Mario Aburto](https://github.com/marioaburto10/)
+
+[Masud Chowdhury](https://github.com/masudhchowdhury/)
 
 
 ## Functionality
