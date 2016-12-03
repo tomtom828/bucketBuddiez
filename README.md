@@ -8,6 +8,12 @@ Log in or create an account, and then click on places you want to travel to in y
 
 Please try out the deployed app in Heroku, found [here](https://bucket-buddiez.herokuapp.com/).
 
+#### Authors:
+[Tom Thompson](https://github.com/tomtom28/)
+[Avani Ghetia](https://github.com/avani19)
+[Mario Aburto](https://github.com/marioaburto10)
+[Masud Chowdhury](https://github.com/masudhchowdhury)
+
 
 ## Functionality
 On the Front End, the app uses `Materialize`, `jQuery`, `AJAX`, and the HTML is rendered using `Handlebars`.
