@@ -3,24 +3,40 @@
 <div id="profileHeader" class="card">
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Your Bucket list</a>
-            <ul id="nav-mobile" class="right ">
-            {{#each bucketlist}}
+            <a href="#" class="brand-logo">Your Bucket List</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="/view/countries">
+                        Add Countries
+                    </a>
+                </li>
+                <li>
+                    <a href="/view/states">
+                        Add States
+                    </a>
+                </li>
+                <li>
+                    <a href="/view/cities">
+                        Add Cities
+                    </a>
+                </li>
+                <li>
+                    <a href="/user/logout">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>Log Out
+                    </a>
+                </li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
                 <li><a href="/view/countries">Add Countries</a></li>
                 <li><a href="/view/states">Add States</a></li>
                 <li><a href="/view/cities">Add Cities</a></li>
-                {{!-- <li>
-                  <form action="user/logout" method="get">
-                  <input type="hidden">
-                  <button type="submit">Log Out</button>
-                  </form>
-                </li> --}}
                 <li><a href="/user/logout">Log Out</a>
-            {{/each}}
             </ul>
         </div>
     </nav>
 </div>
+
 {{!-- display detail of profile --}}
 <div id="detail" class="card teal darken-1 profileDetails center-align">
     <div class="card-content">
@@ -50,7 +66,7 @@
                 </div>
                 <!-- Modal Trigger -->
                 <div class="card-action teal lighten-4">
-                    <a id="button" class="waves-effect waves-light btn buddyButton" href="#modal1" data-locationtype="country" data-locationname="{{this.countryName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+                    <a id="button" class="waves-effect waves-light btn buddyButton" href="#modal1" data-locationtype="country" data-userid="{{this.CountryLikes.UserId}}" data-locationname="{{this.countryName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
                 </div>
             </div>
             {{/each}}
@@ -74,7 +90,7 @@
                 </div>
                 <!-- Modal Trigger -->
                 <div class="card-action teal lighten-4">
-                    <a id="button1" class="waves-effect waves-light btn buddyButton" href="#modal1" data-locationtype="state" data-locationname="{{this.stateName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+                    <a id="button1" class="waves-effect waves-light btn buddyButton" href="#modal1" data-locationtype="state" data-userid="{{this.StateLikes.UserId}}" data-locationname="{{this.stateName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
                 </div>
             </div>
             {{/each}} 
@@ -98,7 +114,7 @@
                 </div>
                 <!-- Modal Trigger -->
                 <div class="card-action teal lighten-4">
-                    <a id="button2" class="waves-effect waves-light btn modal-trigger buddyButton" href="#modal1" data-locationtype="city" data-locationname="{{this.cityName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
+                    <a id="button2" class="waves-effect waves-light btn modal-trigger buddyButton" href="#modal1" data-locationtype="city" data-userid="{{this.CityLikes.UserId}}" data-locationname="{{this.cityName}}" data-locationid="{{this.id}}">Find Travel Buddy</a>
                 </div>
             </div>
             {{/each}} 
@@ -128,3 +144,10 @@
 <script type="text/javascript" src="/assets/javascript/bucketlist-find-buddy.js"></script>
 <!-- Remove Location from Bucketlist -->
 <script type="text/javascript" src="/assets/javascript/bucketlist-remove-location.js"></script>
+
+{{!-- Mobile Sidebar jQuery --}}
+<script type="text/javascript">
+    $( document ).ready(function(){
+        $(".button-collapse").sideNav();
+    });
+</script>

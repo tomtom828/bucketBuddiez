@@ -2,14 +2,39 @@
 <!-- Page Title -->
 <nav>
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo">States Teleporter</a>
-        <ul id="nav-mobile" class="right ">
+        <a href="#" class="brand-logo">State Teleporter</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a href="/view/bucketlist">
+                   View Profile
+                </a>
+            </li>
+            <li>
+                <a href="/view/countries">
+                    Add Countries
+                </a>
+            </li>
+            <li>
+                <a href="/view/cities">
+                    Add Cities
+                </a>
+            </li>
+            <li>
+                <a href="/user/logout">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>Log Out
+                </a>
+            </li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <li><a href="/view/bucketlist">View Profile</a></li>
             <li><a href="/view/countries">Add Countries</a></li>
             <li><a href="/view/cities">Add Cities</a></li>
-            <li><a href="/view/bucketlist">View Profile</a></li>
+            <li><a href="/user/logout">Log Out</a>
         </ul>
     </div>
 </nav>
+
 <!-- Dynamically Render Country Tiles -->
 <main id="tilesContent" data-userid="{{this.user}}">
     {{#each states}}
@@ -24,6 +49,13 @@
     {{/each}}
 </main>
 <!-- Link in jQuery -->
-<script type="text/javascript" src="/assets/javascript/jquery-3.1.1.min.js"></script>
+{{!-- <script type="text/javascript" src="/assets/javascript/jquery-3.1.1.min.js"></script> --}}
 <!-- Add Location to Bucketlist -->
 <script type="text/javascript" src="/assets/javascript/add-countries-states-cities.js"></script>
+
+{{!-- Mobile Sidebar jQuery --}}
+<script type="text/javascript">
+    $( document ).ready(function(){
+        $(".button-collapse").sideNav();
+    });
+</script>
